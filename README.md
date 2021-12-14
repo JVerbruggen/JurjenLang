@@ -1,9 +1,8 @@
 # pyANTLR_project
 
 To execute, follow the following steps
-1. Install ANTLR on your OS
-2. Install the `antlr4-python3-runtime` package for python
-3. `py project.py .\input.jur`
+1. `py -m pip install antlr4-python3-runtime`
+2. `py project.py .\input.jur`
 
 The repository includes a java folder, which is exclusively used for the antlr4 testrig. I wont be implementing any listeners there.
 
@@ -11,7 +10,8 @@ The repository includes a java folder, which is exclusively used for the antlr4 
 
 If you made changes to the language or anything else, and the python files (and java classes for testrig) have to be regenerated, use the following steps:
 1. Make sure you are in the root folder of the repository
-2. `start .\generate_python.bat` should renew all files
+2. Install ANTLR4 on windows
+3. `start .\generate_python.bat` should renew all files
 
 ## Testrig
 
