@@ -1,0 +1,13 @@
+func test{
+    var = 3
+    kaas = -3^2 == -8
+    useelif = false
+    print kaas
+    if kaas{
+        print 666
+    }elif useelif{
+        print 555
+    }else{
+        print 999
+    }
+}

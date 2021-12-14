@@ -1,0 +1,165 @@
+from antlr4 import *
+from antlr_python.JurjenLangParser import JurjenLangParser
+from antlr_python.JurjenLangVisitor import JurjenLangVisitor
+from src.values.JLInteger import *
+from src.values.IValue import *
+from src.scope.ScopeStack import *
+from src.scope.Scope import *
+from src.antlr_parsing.ChildParser import *
+
+class JurjenLangCustomVisitor(JurjenLangVisitor):
+    def __init__(self):
+        self.scope_stack = ScopeStack()
+
+    def visitInteger(self, ctx:JurjenLangParser.IntegerContext):
+        nr_pos = ctx.getChildCount()-1
+        val = IntParser.parse(ctx.getChild(nr_pos))
+        
+        if nr_pos == 1:
+            val = -val
+        return JLInteger(val)
+
+    def visitPrintstat(self, ctx:JurjenLangParser.PrintstatContext):
+        e = self.visit(ctx.expr)
+        print(str(e))
+
+    # Expressions
+    def visitE_addition(self, ctx:JurjenLangParser.E_additionContext):
+        left = self.visit(ctx.left)
+        right = self.visit(ctx.right)
+
+        return left + right
+
+    def visitE_subtraction(self, ctx:JurjenLangParser.E_subtractionContext):
+        left = self.visit(ctx.left)
+        right = self.visit(ctx.right)
+
+        return left - right
+
+    def visitE_division(self, ctx:JurjenLangParser.E_divisionContext):
+        left = self.visit(ctx.left)
+        right = self.visit(ctx.right)
+
+        return left // right
+
+    def visitE_multiply(self, ctx:JurjenLangParser.E_multiplyContext):
+        left = self.visit(ctx.left)     
+        right = self.visit(ctx.right)    
+
+        return left * right
+
+    def visitE_exponent(self, ctx:JurjenLangParser.E_exponentContext):
+        left = self.visit(ctx.left)     
+        right = self.visit(ctx.right) 
+
+        return left ** right
+    
+    def visitE_factorial(self, ctx:JurjenLangParser.E_factorialContext):
+        expr = self.visit(ctx.expr)
+
+        return expr.factorial()
+
+    def visitE_parentheses(self, ctx:JurjenLangParser.E_parenthesesContext):
+        expr = self.visit(ctx.expr)
+
+        return expr
+    
+    def visitE_negation(self, ctx:JurjenLangParser.E_negationContext):
+        expr = self.visit(ctx.expr)
+        return expr.negate()
+
+    # Boolean expressions
+    def visitBoolean_true(self, ctx:JurjenLangParser.Boolean_trueContext):
+        return JLBoolean(True)
+
+    def visitBoolean_false(self, ctx:JurjenLangParser.Boolean_falseContext):
+        return JLBoolean(False)
+
+    def visitBool_e_expressions(self, ctx:JurjenLangParser.Bool_e_expressionsContext):
+        left = self.visit(ctx.left)
+        right = self.visit(ctx.right)
+
+        return left == right
+
+    def visitBool_e_and(self, ctx:JurjenLangParser.Bool_e_andContext):
+        left = self.visit(ctx.left)
+        right = self.visit(ctx.right)
+
+        return left and right
+
+    def visitBool_e_or(self, ctx:JurjenLangParser.Bool_e_orContext):
+        left = self.visit(ctx.left)
+        right = self.visit(ctx.right)
+
+        return left or right
+
+    def visitBool_e_not(self, ctx:JurjenLangParser.Bool_e_notContext):
+        bool_expr = self.visit(ctx.bool_expr)
+
+        return not bool_expr
+    
+    def visitBool_e_variable(self, ctx:JurjenLangParser.Bool_e_variableContext):
+        name = self.visit(ctx.name)
+        variable = self.scope_stack.latest().get_variable(name)
+        return variable.value
+
+    # Assignment
+    def visitAssignment(self, ctx:JurjenLangParser.AssignmentContext):
+        name = self.visit(ctx.name)
+        assignable = self.visit(ctx.ass)
+
+        variable = Variable(name, assignable)
+        self.scope_stack.latest().add_local_variable(variable)
+
+        return assignable
+    
+    def visitVariable(self, ctx:JurjenLangParser.VariableContext):
+        return str(ctx.getChild(0))
+
+    def visitE_variable(self, ctx:JurjenLangParser.E_variableContext):
+        name = self.visit(ctx.name)
+        variable = self.scope_stack.latest().get_variable(name)
+        return variable.value
+
+    # Scope
+    def visitScope(self, ctx:JurjenLangParser.ScopeContext):
+        self.scope_stack.push()
+        self.visitChildren(ctx) 
+        self.scope_stack.pop()
+
+    # If chains
+    def visitIfchain(self, ctx:JurjenLangParser.IfchainContext):
+        executed = self.visit(ctx.ifchain_if)
+        if executed: return self
+
+        executed = self.visit(ctx.ifchain_elifs)
+        if executed: return self
+        
+        self.visit(ctx.ifchain_else)
+        return self
+    
+    def visitElifstat_chain(self, ctx:JurjenLangParser.Elifstat_chainContext):
+        children = ctx.getChildren()
+        executed = False
+        for child in children:
+            executed = self.visit(child)
+            if executed: break
+        return executed
+
+    def visitIfstat(self, ctx:JurjenLangParser.IfstatContext):
+        bool_expr = self.visit(ctx.expr)
+
+        if bool(bool_expr):
+            self.visit(ctx.scope())
+        
+        return bool(bool_expr)
+
+    def visitElifstat(self, ctx:JurjenLangParser.ElifstatContext):
+        bool_expr = self.visit(ctx.expr)
+
+        if bool_expr:
+            self.visit(ctx.scope())
+        
+        return bool(bool_expr)
+
+        
