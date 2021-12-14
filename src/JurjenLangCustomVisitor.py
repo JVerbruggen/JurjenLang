@@ -82,7 +82,7 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         left = self.visit(ctx.left)
         right = self.visit(ctx.right)
 
-        return left // right
+        return left / right
 
     def visitE_multiply(self, ctx:JurjenLangParser.E_multiplyContext):
         left = self.visit(ctx.left)     
