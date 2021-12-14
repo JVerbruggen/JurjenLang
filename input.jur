@@ -9,7 +9,6 @@ func test{
     print x*2
     print x
     print "hallo"
-    print "faggot"
 
     mijnstring = "bas"
     print mijnstring*10
