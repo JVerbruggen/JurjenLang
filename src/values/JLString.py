@@ -11,6 +11,12 @@ class JLString(IValue):
     def __mul__(self, other):
         if type(other) is not JLInteger:
             raise ValueError("JLString can only be multiplied by a JLInteger")
+
+        using_val = self.value
+        repeat = other.value
+        if repeat < 0:
+            using_val = using_val[::-1]
+            repeat = -repeat
         
-        self.value = ''.join([self.value for _ in range(other.value)])
-        return JLString(self.value)
+        res = ''.join([using_val for _ in range(repeat)])
+        return JLString(res)
