@@ -1,4 +1,4 @@
-# pyANTLR_project
+# JurjenLang
 
 To execute, follow the following steps
 1. `py -m pip install antlr4-python3-runtime`
