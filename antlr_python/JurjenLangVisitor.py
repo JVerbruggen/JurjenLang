@@ -84,6 +84,11 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by JurjenLangParser#assertion.
+    def visitAssertion(self, ctx:JurjenLangParser.AssertionContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by JurjenLangParser#assignment.
     def visitAssignment(self, ctx:JurjenLangParser.AssignmentContext):
         return self.visitChildren(ctx)

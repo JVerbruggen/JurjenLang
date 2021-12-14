@@ -11,6 +11,7 @@ stats   : stat*     ;
 stat    : assignment
         | printstat
         | ifchain
+        | assertion
         ;
 
 printstat   : PRINT_KW expr=assignable  ;
@@ -22,6 +23,8 @@ elifstat_chain  : (elifstat)*                ;
 elifstat    : ELIF_KW expr=bool_e scope      ;
 maybe_elsestat  : (elsestat)?                ;
 elsestat    : ELSE_KW scope                  ;
+
+assertion   : ASSERT_KW expr=bool_e          ;
 
 assignment  : name=variable ASSIGN ass=assignable    ;
 
@@ -74,6 +77,7 @@ NUMBERS : DIGIT+ ;
 FUNC_KW     : 'func'    ;
 FUNC_RET    : 'return'  ;
 PRINT_KW    : 'print'   ;
+ASSERT_KW   : 'assert'  ;
 
 IF_KW       : 'if'      ;
 ELIF_KW     : 'elif'    ;

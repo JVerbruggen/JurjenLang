@@ -143,6 +143,15 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JurjenLangParser#assertion.
+    def enterAssertion(self, ctx:JurjenLangParser.AssertionContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#assertion.
+    def exitAssertion(self, ctx:JurjenLangParser.AssertionContext):
+        pass
+
+
     # Enter a parse tree produced by JurjenLangParser#assignment.
     def enterAssignment(self, ctx:JurjenLangParser.AssignmentContext):
         pass

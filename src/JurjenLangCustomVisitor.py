@@ -207,4 +207,11 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         
         return bool(bool_expr)
 
+    # Assertions
+    def visitAssertion(self, ctx:JurjenLangParser.AssertionContext):
+        bool_expr = self.visit(ctx.expr)
+
+        if not bool_expr:
+            raise ValueError("Assertion Error!")
         
+        return True
