@@ -53,13 +53,23 @@ boolean     : TRUE_KW   # boolean_true
             | FALSE_KW  # boolean_false
             ;
 
-variable    : IDENTIFIER                ;
-integer     : (SYMB_MINUS)? NUMBERS     ;
-string      : SYMB_DQUOTE IDENTIFIER SYMB_DQUOTE ;
+variable    : IDENTIFIER ;
+float_type  : SYMB_MINUS? pre_nrs=NUMBERS SYMB_DOT post_nrs=NUMBERS FLOAT_IDENT         # float_by_dot_and_ident
+            | SYMB_MINUS? pre_nrs=NUMBERS SYMB_DOT post_nrs=NUMBERS                     # float_by_dot
+            | SYMB_MINUS? pre_nrs=NUMBERS FLOAT_IDENT                                   # float_by_ident
+            | SYMB_MINUS? SYMB_DOT post_nrs=NUMBERS                                     # float_no_prior_by_dot
+            | SYMB_MINUS? SYMB_DOT post_nrs=NUMBERS FLOAT_IDENT                         # float_no_prior_by_dot_and_ident
+            ;
 
-any_value   : integer
+integer     : (SYMB_MINUS)? NUMBERS                     ;
+string      : SYMB_DQUOTE IDENTIFIER SYMB_DQUOTE        ;
+
+any_value   : float_type
+            | integer
             | string
             ;
+
+NUMBERS : DIGIT+ ;
 
 FUNC_KW     : 'func'    ;
 FUNC_RET    : 'return'  ;
@@ -76,8 +86,6 @@ AND_KW      : 'and'     ;
 OR_KW       : 'or'      ;
 NOT_KW      : 'not'     ;
 
-NUMBERS         : DIGIT+    ;
-IDENTIFIER      : ('a' .. 'z' | 'A' .. 'Z') ('a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_')*   ;
 SYMB_EXCLM      : '!'   ;
 SYMB_HAT        : '^'   ;
 SYMB_STAR       : '*'   ;
@@ -86,12 +94,15 @@ SYMB_PLUS       : '+'   ;
 SYMB_MINUS      : '-'   ;
 SYMB_QUOTE      : '\''  ;
 SYMB_DQUOTE     : '"'   ;
+SYMB_DOT        : '.'   ;
+FLOAT_IDENT     : 'f'   ;
 ASSIGN          : '='   ;
 EQUALS          : '=='  ;
 PAR_OPEN        : '('   ;
 PAR_CLOSE       : ')'   ;
 BRACK_OPEN      : '{'   ;
 BRACK_CLOSE     : '}'   ;
+IDENTIFIER      : ('a' .. 'z' | 'A' .. 'Z') ('a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_')*   ;
 WS              : [ \t\r\n]+ -> skip    ;
 
 fragment DIGIT  : '0' .. '9'    ;

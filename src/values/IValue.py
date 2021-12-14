@@ -1,10 +1,7 @@
 class IValue:
     def string() -> str:
         raise NotImplementedError()
-
-    def factorial(self) -> 'IValue':
-        raise NotImplementedError()
-
+        
     def negate(self) -> 'IValue':
         raise NotImplementedError()
     

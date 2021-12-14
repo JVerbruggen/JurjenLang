@@ -341,6 +341,51 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JurjenLangParser#float_by_dot_and_ident.
+    def enterFloat_by_dot_and_ident(self, ctx:JurjenLangParser.Float_by_dot_and_identContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#float_by_dot_and_ident.
+    def exitFloat_by_dot_and_ident(self, ctx:JurjenLangParser.Float_by_dot_and_identContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#float_by_dot.
+    def enterFloat_by_dot(self, ctx:JurjenLangParser.Float_by_dotContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#float_by_dot.
+    def exitFloat_by_dot(self, ctx:JurjenLangParser.Float_by_dotContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#float_by_ident.
+    def enterFloat_by_ident(self, ctx:JurjenLangParser.Float_by_identContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#float_by_ident.
+    def exitFloat_by_ident(self, ctx:JurjenLangParser.Float_by_identContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#float_no_prior_by_dot.
+    def enterFloat_no_prior_by_dot(self, ctx:JurjenLangParser.Float_no_prior_by_dotContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#float_no_prior_by_dot.
+    def exitFloat_no_prior_by_dot(self, ctx:JurjenLangParser.Float_no_prior_by_dotContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#float_no_prior_by_dot_and_ident.
+    def enterFloat_no_prior_by_dot_and_ident(self, ctx:JurjenLangParser.Float_no_prior_by_dot_and_identContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#float_no_prior_by_dot_and_ident.
+    def exitFloat_no_prior_by_dot_and_ident(self, ctx:JurjenLangParser.Float_no_prior_by_dot_and_identContext):
+        pass
+
+
     # Enter a parse tree produced by JurjenLangParser#integer.
     def enterInteger(self, ctx:JurjenLangParser.IntegerContext):
         pass

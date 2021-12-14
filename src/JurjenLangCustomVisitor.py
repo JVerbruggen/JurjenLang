@@ -2,6 +2,7 @@ from antlr4 import *
 from antlr_python.JurjenLangParser import JurjenLangParser
 from antlr_python.JurjenLangVisitor import JurjenLangVisitor
 from src.values.JLInteger import *
+from src.values.JLFloat import *
 from src.values.JLString import *
 from src.values.IValue import *
 from src.scope.ScopeStack import *
@@ -12,9 +13,10 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
     def __init__(self):
         self.scope_stack = ScopeStack()
 
+    # Types
     def visitInteger(self, ctx:JurjenLangParser.IntegerContext):
         nr_pos = ctx.getChildCount()-1
-        val = IntParser.parse(ctx.getChild(nr_pos))
+        val = IntParser.parse(ctx.getChild(0))
         
         if nr_pos == 1:
             val = -val
@@ -23,7 +25,42 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
     def visitString(self, ctx:JurjenLangParser.StringContext):
         val = StringParser.parse(ctx.getChild(1))
         return JLString(val)
+    
+    def _float_logic(self, ctx, child_count_check, do_pre=True, do_post=True, pre_nrs_loc=0, post_nrs_loc=2):
+        children_count = ctx.getChildCount()
+        mult = 1
+        if children_count == child_count_check:
+            pre_nrs_loc += 1
+            post_nrs_loc += 1
+            mult = -1
+        
+        pre = None
+        post = None
+        if do_pre:
+            pre = ctx.getChild(pre_nrs_loc)
+        if do_post:
+            post = ctx.getChild(post_nrs_loc)
+        
+        val = FloatParser.parse(pre, post) * mult
+        return JLFloat(val)
 
+    def visitFloat_by_dot_and_ident(self, ctx:JurjenLangParser.Float_by_dot_and_identContext):
+        return self._float_logic(ctx, 5)
+
+    def visitFloat_by_dot(self, ctx:JurjenLangParser.Float_by_dotContext):
+        return self._float_logic(ctx, 4)
+
+    def visitFloat_by_ident(self, ctx:JurjenLangParser.Float_by_identContext):
+        return self._float_logic(ctx, 4, do_post=False)
+    
+    def visitFloat_no_prior_by_dot(self, ctx:JurjenLangParser.Float_no_prior_by_dotContext):
+        return self._float_logic(ctx, 3, do_pre=False, post_nrs_loc=1)
+
+    def visitFloat_no_prior_by_dot_and_ident(self, ctx:JurjenLangParser.Float_no_prior_by_dot_and_identContext):
+        return self._float_logic(ctx, 4, do_pre=False, post_nrs_loc=1)
+
+
+    # Printing
     def visitPrintstat(self, ctx:JurjenLangParser.PrintstatContext):
         e = self.visit(ctx.expr)
         print(str(e))

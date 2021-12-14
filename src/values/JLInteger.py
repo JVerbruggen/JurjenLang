@@ -1,7 +1,8 @@
 from src.values.IValue import *
+from src.values.INumericalValue import *
 from src.values.JLBoolean import *
 
-class JLInteger(IValue):
+class JLInteger(INumericalValue):
     def __init__(self, value: int):
         self.value = value
 

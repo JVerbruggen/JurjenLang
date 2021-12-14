@@ -194,6 +194,31 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by JurjenLangParser#float_by_dot_and_ident.
+    def visitFloat_by_dot_and_ident(self, ctx:JurjenLangParser.Float_by_dot_and_identContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#float_by_dot.
+    def visitFloat_by_dot(self, ctx:JurjenLangParser.Float_by_dotContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#float_by_ident.
+    def visitFloat_by_ident(self, ctx:JurjenLangParser.Float_by_identContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#float_no_prior_by_dot.
+    def visitFloat_no_prior_by_dot(self, ctx:JurjenLangParser.Float_no_prior_by_dotContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#float_no_prior_by_dot_and_ident.
+    def visitFloat_no_prior_by_dot_and_ident(self, ctx:JurjenLangParser.Float_no_prior_by_dot_and_identContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by JurjenLangParser#integer.
     def visitInteger(self, ctx:JurjenLangParser.IntegerContext):
         return self.visitChildren(ctx)

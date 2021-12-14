@@ -13,4 +13,7 @@ func test{
     mijnstring = "bas"
     print mijnstring*10
     print mijnstring*-2
+
+    print .2f
+
 }
