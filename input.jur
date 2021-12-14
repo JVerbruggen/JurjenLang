@@ -1,0 +1,16 @@
+func test{
+    x = 3
+    somebool = true
+    print x
+    if somebool{
+        x = 5
+        print x
+    }
+    print x*2
+    print x
+    print "hallo"
+    print "faggot"
+
+    mijnstring = "bas"
+    print mijnstring*10
+}

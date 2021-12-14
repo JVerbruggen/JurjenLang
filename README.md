@@ -3,7 +3,7 @@
 To execute, follow the following steps
 1. Install ANTLR on your OS
 2. Install the `antlr4-python3-runtime` package for python
-3. `py project.py .\text.txt`
+3. `py project.py .\input.jur`
 
 The repository includes a java folder, which is exclusively used for the antlr4 testrig. I wont be implementing any listeners there.
 

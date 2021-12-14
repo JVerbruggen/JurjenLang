@@ -170,12 +170,12 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by JurjenLangParser#e_integer.
-    def enterE_integer(self, ctx:JurjenLangParser.E_integerContext):
+    # Enter a parse tree produced by JurjenLangParser#e_any_value.
+    def enterE_any_value(self, ctx:JurjenLangParser.E_any_valueContext):
         pass
 
-    # Exit a parse tree produced by JurjenLangParser#e_integer.
-    def exitE_integer(self, ctx:JurjenLangParser.E_integerContext):
+    # Exit a parse tree produced by JurjenLangParser#e_any_value.
+    def exitE_any_value(self, ctx:JurjenLangParser.E_any_valueContext):
         pass
 
 
@@ -314,6 +314,24 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JurjenLangParser#boolean_true.
+    def enterBoolean_true(self, ctx:JurjenLangParser.Boolean_trueContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#boolean_true.
+    def exitBoolean_true(self, ctx:JurjenLangParser.Boolean_trueContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#boolean_false.
+    def enterBoolean_false(self, ctx:JurjenLangParser.Boolean_falseContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#boolean_false.
+    def exitBoolean_false(self, ctx:JurjenLangParser.Boolean_falseContext):
+        pass
+
+
     # Enter a parse tree produced by JurjenLangParser#variable.
     def enterVariable(self, ctx:JurjenLangParser.VariableContext):
         pass
@@ -332,21 +350,21 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by JurjenLangParser#boolean_true.
-    def enterBoolean_true(self, ctx:JurjenLangParser.Boolean_trueContext):
+    # Enter a parse tree produced by JurjenLangParser#string.
+    def enterString(self, ctx:JurjenLangParser.StringContext):
         pass
 
-    # Exit a parse tree produced by JurjenLangParser#boolean_true.
-    def exitBoolean_true(self, ctx:JurjenLangParser.Boolean_trueContext):
+    # Exit a parse tree produced by JurjenLangParser#string.
+    def exitString(self, ctx:JurjenLangParser.StringContext):
         pass
 
 
-    # Enter a parse tree produced by JurjenLangParser#boolean_false.
-    def enterBoolean_false(self, ctx:JurjenLangParser.Boolean_falseContext):
+    # Enter a parse tree produced by JurjenLangParser#any_value.
+    def enterAny_value(self, ctx:JurjenLangParser.Any_valueContext):
         pass
 
-    # Exit a parse tree produced by JurjenLangParser#boolean_false.
-    def exitBoolean_false(self, ctx:JurjenLangParser.Boolean_falseContext):
+    # Exit a parse tree produced by JurjenLangParser#any_value.
+    def exitAny_value(self, ctx:JurjenLangParser.Any_valueContext):
         pass
 
 

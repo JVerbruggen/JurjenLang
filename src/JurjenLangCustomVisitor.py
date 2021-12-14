@@ -2,6 +2,7 @@ from antlr4 import *
 from antlr_python.JurjenLangParser import JurjenLangParser
 from antlr_python.JurjenLangVisitor import JurjenLangVisitor
 from src.values.JLInteger import *
+from src.values.JLString import *
 from src.values.IValue import *
 from src.scope.ScopeStack import *
 from src.scope.Scope import *
@@ -18,6 +19,10 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         if nr_pos == 1:
             val = -val
         return JLInteger(val)
+    
+    def visitString(self, ctx:JurjenLangParser.StringContext):
+        val = StringParser.parse(ctx.getChild(1))
+        return JLString(val)
 
     def visitPrintstat(self, ctx:JurjenLangParser.PrintstatContext):
         e = self.visit(ctx.expr)
@@ -108,8 +113,11 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         name = self.visit(ctx.name)
         assignable = self.visit(ctx.ass)
 
-        variable = Variable(name, assignable)
-        self.scope_stack.latest().add_local_variable(variable)
+        variable = self.scope_stack.latest().get_variable(name)
+        if variable is not None:
+            variable.value = assignable
+        else:
+            self.scope_stack.latest().add_local_variable(Variable(name, assignable))
 
         return assignable
     

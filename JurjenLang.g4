@@ -18,11 +18,10 @@ retstat     : expr = assignable         ;
 
 ifchain     : ifchain_if=ifstat ifchain_elifs=elifstat_chain ifchain_else=maybe_elsestat  ;
 ifstat      : IF_KW expr=bool_e scope        ;
-elifstat_chain  : (elifstat)*           ;
+elifstat_chain  : (elifstat)*                ;
 elifstat    : ELIF_KW expr=bool_e scope      ;
-maybe_elsestat  : (elsestat)?           ;
-elsestat    : ELSE_KW scope             ;
-
+maybe_elsestat  : (elsestat)?                ;
+elsestat    : ELSE_KW scope                  ;
 
 assignment  : name=variable ASSIGN ass=assignable    ;
 
@@ -38,8 +37,8 @@ e   : PAR_OPEN expr=e PAR_CLOSE             # e_parentheses
     | left=e operator=SYMB_PLUS right=e     # e_addition
     | left=e operator=SYMB_MINUS right=e    # e_subtraction
     | SYMB_MINUS expr=e                     # e_negation
-    | value=integer                         # e_integer
     | name=variable                         # e_variable
+    | value=any_value                       # e_any_value
     ;
 
 bool_e  : left=bool_e AND_KW right=bool_e   # bool_e_and
@@ -50,10 +49,16 @@ bool_e  : left=bool_e AND_KW right=bool_e   # bool_e_and
         | name=variable                     # bool_e_variable
         ;
 
-variable    : IDENTIFIER                ;
-integer     : (SYMB_MINUS)? NUMBERS     ;
 boolean     : TRUE_KW   # boolean_true
             | FALSE_KW  # boolean_false
+            ;
+
+variable    : IDENTIFIER                ;
+integer     : (SYMB_MINUS)? NUMBERS     ;
+string      : SYMB_DQUOTE IDENTIFIER SYMB_DQUOTE ;
+
+any_value   : integer
+            | string
             ;
 
 FUNC_KW     : 'func'    ;
@@ -79,6 +84,8 @@ SYMB_STAR       : '*'   ;
 SYMB_SLASH      : '/'   ;
 SYMB_PLUS       : '+'   ;
 SYMB_MINUS      : '-'   ;
+SYMB_QUOTE      : '\''  ;
+SYMB_DQUOTE     : '"'   ;
 ASSIGN          : '='   ;
 EQUALS          : '=='  ;
 PAR_OPEN        : '('   ;

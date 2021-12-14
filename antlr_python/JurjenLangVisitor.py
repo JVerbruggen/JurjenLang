@@ -99,8 +99,8 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by JurjenLangParser#e_integer.
-    def visitE_integer(self, ctx:JurjenLangParser.E_integerContext):
+    # Visit a parse tree produced by JurjenLangParser#e_any_value.
+    def visitE_any_value(self, ctx:JurjenLangParser.E_any_valueContext):
         return self.visitChildren(ctx)
 
 
@@ -179,6 +179,16 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by JurjenLangParser#boolean_true.
+    def visitBoolean_true(self, ctx:JurjenLangParser.Boolean_trueContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#boolean_false.
+    def visitBoolean_false(self, ctx:JurjenLangParser.Boolean_falseContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by JurjenLangParser#variable.
     def visitVariable(self, ctx:JurjenLangParser.VariableContext):
         return self.visitChildren(ctx)
@@ -189,13 +199,13 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by JurjenLangParser#boolean_true.
-    def visitBoolean_true(self, ctx:JurjenLangParser.Boolean_trueContext):
+    # Visit a parse tree produced by JurjenLangParser#string.
+    def visitString(self, ctx:JurjenLangParser.StringContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by JurjenLangParser#boolean_false.
-    def visitBoolean_false(self, ctx:JurjenLangParser.Boolean_falseContext):
+    # Visit a parse tree produced by JurjenLangParser#any_value.
+    def visitAny_value(self, ctx:JurjenLangParser.Any_valueContext):
         return self.visitChildren(ctx)
 
 
