@@ -278,6 +278,15 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JurjenLangParser#bool_parentheses.
+    def enterBool_parentheses(self, ctx:JurjenLangParser.Bool_parenthesesContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#bool_parentheses.
+    def exitBool_parentheses(self, ctx:JurjenLangParser.Bool_parenthesesContext):
+        pass
+
+
     # Enter a parse tree produced by JurjenLangParser#bool_e_variable.
     def enterBool_e_variable(self, ctx:JurjenLangParser.Bool_e_variableContext):
         pass
@@ -320,6 +329,15 @@ class JurjenLangListener(ParseTreeListener):
 
     # Exit a parse tree produced by JurjenLangParser#bool_e_expressions.
     def exitBool_e_expressions(self, ctx:JurjenLangParser.Bool_e_expressionsContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#bool_e_expressions_bools.
+    def enterBool_e_expressions_bools(self, ctx:JurjenLangParser.Bool_e_expressions_boolsContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#bool_e_expressions_bools.
+    def exitBool_e_expressions_bools(self, ctx:JurjenLangParser.Bool_e_expressions_boolsContext):
         pass
 
 

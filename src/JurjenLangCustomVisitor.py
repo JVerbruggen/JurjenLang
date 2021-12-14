@@ -117,12 +117,6 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
     def visitBoolean_false(self, ctx:JurjenLangParser.Boolean_falseContext):
         return JLBoolean(False)
 
-    def visitBool_e_expressions(self, ctx:JurjenLangParser.Bool_e_expressionsContext):
-        left = self.visit(ctx.left)
-        right = self.visit(ctx.right)
-
-        return left == right
-
     def visitBool_e_and(self, ctx:JurjenLangParser.Bool_e_andContext):
         left = self.visit(ctx.left)
         right = self.visit(ctx.right)
@@ -144,6 +138,21 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         name = self.visit(ctx.name)
         variable = self.scope_stack.latest().get_variable(name)
         return variable.value
+    
+    def visitBool_e_expressions(self, ctx:JurjenLangParser.Bool_e_expressionsContext):
+        left = self.visit(ctx.left)
+        right = self.visit(ctx.right)
+
+        return left == right
+
+    def visitBool_e_expressions_bools(self, ctx:JurjenLangParser.Bool_e_expressions_boolsContext):
+        left = self.visit(ctx.left)
+        right = self.visit(ctx.right)
+
+        return left == right
+
+    def visitBool_parentheses(self, ctx:JurjenLangParser.Bool_parenthesesContext):
+        return self.visit(ctx.bool_expr)
 
     # Assignment
     def visitAssignment(self, ctx:JurjenLangParser.AssignmentContext):

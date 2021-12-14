@@ -159,6 +159,11 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by JurjenLangParser#bool_parentheses.
+    def visitBool_parentheses(self, ctx:JurjenLangParser.Bool_parenthesesContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by JurjenLangParser#bool_e_variable.
     def visitBool_e_variable(self, ctx:JurjenLangParser.Bool_e_variableContext):
         return self.visitChildren(ctx)
@@ -181,6 +186,11 @@ class JurjenLangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by JurjenLangParser#bool_e_expressions.
     def visitBool_e_expressions(self, ctx:JurjenLangParser.Bool_e_expressionsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#bool_e_expressions_bools.
+    def visitBool_e_expressions_bools(self, ctx:JurjenLangParser.Bool_e_expressions_boolsContext):
         return self.visitChildren(ctx)
 
 

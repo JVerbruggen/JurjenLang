@@ -7,6 +7,9 @@ class JLBoolean(IValue):
     def string(self):
         return "true" if self.value else "false"
 
+    def __eq__(self, other):
+        return JLBoolean(self.value == other.value)
+
     def __bool__(self):
         return self.value
     

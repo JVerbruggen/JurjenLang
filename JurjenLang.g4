@@ -44,10 +44,12 @@ e   : PAR_OPEN expr=e PAR_CLOSE             # e_parentheses
     | value=any_value                       # e_any_value
     ;
 
-bool_e  : left=bool_e AND_KW right=bool_e   # bool_e_and
+bool_e  : PAR_OPEN bool_expr=bool_e PAR_CLOSE   # bool_parentheses
+        | left=bool_e AND_KW right=bool_e   # bool_e_and
         | left=bool_e OR_KW right=bool_e    # bool_e_or
         | NOT_KW bool_expr=bool_e           # bool_e_not
         | left=e EQUALS right=e             # bool_e_expressions
+        | left=bool_e EQUALS right=bool_e   # bool_e_expressions_bools
         | value=boolean                     # bool_e_boolean
         | name=variable                     # bool_e_variable
         ;
