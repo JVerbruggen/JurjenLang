@@ -1,75 +1,16 @@
-x = 3
-somebool = true
-print x
-if somebool{
-    x = 5
-    print x
-}
-print x*2
-print x
-print "hallo"
-
-mijnstring = "bas is cool"
-print mijnstring*10
-print mijnstring*-2
-
-print .2f
-
-print .2*2
-
-print .2/2
-print .2+2
-print 2+.2
-print 2+2f-0.1
-
-i = 0
-while i < 10{
-    print "whileloop"
-    i = i + 1
-}
-
-print mijnstring*-2+10
-print 2
-
-i = 0
-basstring = "bas"
-basstringworking = basstring
-while i < 10{
-    print basstringworking
-
-    basstringworking = basstringworking*-1
-    basstring = basstring*-1
-
-    basstringworking = basstringworking + basstring
-
-
-    i = i + 1
-}
-
-floatone = 1.0
-floattwo = 1f
-floatthree = .1
-floatfour = .1f
-floatfive = 1.0f
-
-print floatone + floattwo + floatthree + floatfour + floatfive
-
-print 1 + 1.2f
-print 1.2f + 1
-
-func test{
-    j = 0
-    while j < 10{
-        print "testfunc"
-        j = j + 1
+func fact x{
+    printscope
+    if x < 2{
+        return 1
     }
+    return fact(x-1) * x
 }
 
-print "wowowowow"
+func fib x{
+    if x < 2{
+        return 1
+    }
+    return fib(x-1) + fib(x-2)
+}
 
-test()
-
-basvar = "bas " + "is "
-print basvar + "bas"
-
-print "hallo\n\"bas\""
+print fib(20)

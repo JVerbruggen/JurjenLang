@@ -27,6 +27,18 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterGlobalscope(JurjenLangParser.GlobalscopeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGlobalscope(JurjenLangParser.GlobalscopeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunc(JurjenLangParser.FuncContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -58,6 +70,54 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunc_return(JurjenLangParser.Func_returnContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunc_call(JurjenLangParser.Func_callContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunc_call(JurjenLangParser.Func_callContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunc_params(JurjenLangParser.Func_paramsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunc_params(JurjenLangParser.Func_paramsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunc_call_params_single(JurjenLangParser.Func_call_params_singleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunc_call_params_single(JurjenLangParser.Func_call_params_singleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunc_call_params_multiple(JurjenLangParser.Func_call_params_multipleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunc_call_params_multiple(JurjenLangParser.Func_call_params_multipleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -99,6 +159,30 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDebugtools(JurjenLangParser.DebugtoolsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDebugtools(JurjenLangParser.DebugtoolsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrintscopestat(JurjenLangParser.PrintscopestatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrintscopestat(JurjenLangParser.PrintscopestatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPrintstat(JurjenLangParser.PrintstatContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -118,6 +202,102 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRetstat(JurjenLangParser.RetstatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterWhileloop(JurjenLangParser.WhileloopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWhileloop(JurjenLangParser.WhileloopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIfchain(JurjenLangParser.IfchainContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIfchain(JurjenLangParser.IfchainContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIfstat(JurjenLangParser.IfstatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIfstat(JurjenLangParser.IfstatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElifstat_chain(JurjenLangParser.Elifstat_chainContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElifstat_chain(JurjenLangParser.Elifstat_chainContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElifstat(JurjenLangParser.ElifstatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElifstat(JurjenLangParser.ElifstatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMaybe_elsestat(JurjenLangParser.Maybe_elsestatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMaybe_elsestat(JurjenLangParser.Maybe_elsestatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElsestat(JurjenLangParser.ElsestatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElsestat(JurjenLangParser.ElsestatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAssertion(JurjenLangParser.AssertionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssertion(JurjenLangParser.AssertionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -159,13 +339,13 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterE_integer(JurjenLangParser.E_integerContext ctx) { }
+	@Override public void enterE_any_value(JurjenLangParser.E_any_valueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitE_integer(JurjenLangParser.E_integerContext ctx) { }
+	@Override public void exitE_any_value(JurjenLangParser.E_any_valueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -255,6 +435,18 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterE_negation(JurjenLangParser.E_negationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitE_negation(JurjenLangParser.E_negationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterE_division(JurjenLangParser.E_divisionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -274,6 +466,30 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBool_e_not(JurjenLangParser.Bool_e_notContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBool_parentheses(JurjenLangParser.Bool_parenthesesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBool_parentheses(JurjenLangParser.Bool_parenthesesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBool_e_variable(JurjenLangParser.Bool_e_variableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBool_e_variable(JurjenLangParser.Bool_e_variableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -327,25 +543,13 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariable(JurjenLangParser.VariableContext ctx) { }
+	@Override public void enterBool_e_expressions_bools(JurjenLangParser.Bool_e_expressions_boolsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVariable(JurjenLangParser.VariableContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterInteger(JurjenLangParser.IntegerContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitInteger(JurjenLangParser.IntegerContext ctx) { }
+	@Override public void exitBool_e_expressions_bools(JurjenLangParser.Bool_e_expressions_boolsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -370,6 +574,138 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBoolean_false(JurjenLangParser.Boolean_falseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComparison(JurjenLangParser.ComparisonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComparison(JurjenLangParser.ComparisonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBool_comparison(JurjenLangParser.Bool_comparisonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBool_comparison(JurjenLangParser.Bool_comparisonContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVariable(JurjenLangParser.VariableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVariable(JurjenLangParser.VariableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFloat_by_dot_and_ident(JurjenLangParser.Float_by_dot_and_identContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFloat_by_dot_and_ident(JurjenLangParser.Float_by_dot_and_identContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFloat_by_dot(JurjenLangParser.Float_by_dotContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFloat_by_dot(JurjenLangParser.Float_by_dotContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFloat_by_ident(JurjenLangParser.Float_by_identContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFloat_by_ident(JurjenLangParser.Float_by_identContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFloat_no_prior_by_dot(JurjenLangParser.Float_no_prior_by_dotContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFloat_no_prior_by_dot(JurjenLangParser.Float_no_prior_by_dotContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFloat_no_prior_by_dot_and_ident(JurjenLangParser.Float_no_prior_by_dot_and_identContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFloat_no_prior_by_dot_and_ident(JurjenLangParser.Float_no_prior_by_dot_and_identContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInteger(JurjenLangParser.IntegerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInteger(JurjenLangParser.IntegerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterString(JurjenLangParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitString(JurjenLangParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAny_value(JurjenLangParser.Any_valueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAny_value(JurjenLangParser.Any_valueContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

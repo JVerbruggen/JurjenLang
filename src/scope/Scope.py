@@ -43,5 +43,5 @@ class Scope:
             del var
 
     def __str__(self):
-        local_var_str = ',\n         '.join([f"{type(variable)} {variable.get_name()}:{variable.get_value()}" for variable in self.local_variables])
+        local_var_str = ',\n         '.join([repr(variable) for variable in self.local_variables])
         return " Scope: {" + local_var_str + "}"

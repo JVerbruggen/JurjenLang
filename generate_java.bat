@@ -1,2 +1,2 @@
-antlr4 -Dlanguage=Java -o java/ JurjenLang.g4
+call antlr4 -Dlanguage=Java -visitor -o java/ JurjenLang.g4
 PAUSE

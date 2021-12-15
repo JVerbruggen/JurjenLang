@@ -5,11 +5,15 @@ globalscope     : (func | stat)*
                 ;
 
 func        : func_def scope        ;
-func_def    : FUNC_KW IDENTIFIER    ;
-func_return : FUNC_RET retstat      ;
-func_call   : IDENTIFIER PAR_OPEN PAR_CLOSE     ;
+func_def    : FUNC_KW IDENTIFIER func_params    ;
+func_return : FUNC_RET retstat?      ;
+func_call   : IDENTIFIER PAR_OPEN func_call_params PAR_CLOSE     ;
+func_params : IDENTIFIER* ;
+func_call_params        : assignable?                           # func_call_params_single
+                        | assignable (SYMB_COMMA assignable)*   # func_call_params_multiple
+                        ;
 
-scope   : BRACK_OPEN stats func_return? BRACK_CLOSE ;
+scope   : BRACK_OPEN stats BRACK_CLOSE ;
 
 stats   : stat*     ;
 stat    : assignment
@@ -17,7 +21,7 @@ stat    : assignment
         | ifchain
         | assertion
         | whileloop
-        | func_call
+        | func_return
         ;
 
 debugtools      : printstat
@@ -54,6 +58,7 @@ e   : PAR_OPEN expr=e PAR_CLOSE             # e_parentheses
     | left=e operator=SYMB_MINUS right=e    # e_subtraction
     | SYMB_MINUS expr=e                     # e_negation
     | name=variable                         # e_variable
+    | e_func=func_call                      # e_func
     | value=any_value                       # e_any_value
     ;
 
@@ -63,13 +68,13 @@ bool_e  : PAR_OPEN bool_expr=bool_e PAR_CLOSE                   # bool_parenthes
         | NOT_KW bool_expr=bool_e                               # bool_e_not
         | left=e oper=comparison right=e                        # bool_e_expressions
         | left=bool_e oper=bool_comparison right=bool_e         # bool_e_expressions_bools
-        | value=boolean                                         # bool_e_boolean
+        | value=boolean_type                                    # bool_e_boolean
         | name=variable                                         # bool_e_variable
         ;
 
-boolean     : TRUE_KW   # boolean_true
-            | FALSE_KW  # boolean_false
-            ;
+boolean_type    : TRUE_KW   # boolean_true
+                | FALSE_KW  # boolean_false
+                ;
 
 comparison      : EQUALS
                 | ISNOT
@@ -134,6 +139,7 @@ SYMB_MINUS      : '-'   ;
 SYMB_QUOTE      : '\''  ;
 SYMB_DQUOTE     : '"'   ;
 SYMB_DOT        : '.'   ;
+SYMB_COMMA      : ','   ;
 FLOAT_IDENT     : 'f'   ;
 ASSIGN          : '='   ;
 PAR_OPEN        : '('   ;

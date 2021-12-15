@@ -1,0 +1,12 @@
+func fib x{
+    if x > 2{
+        if x > 4{
+            return x+10
+        }
+        return x+2
+    }
+    return x+1
+}
+print fib(3)
+print fib(2)
+print fib(5)

@@ -26,3 +26,8 @@ class JLString(IValue):
             raise ValueError("JLString can only be added to another JLString")
         
         return JLString(self.value + other.value)
+
+    def __repr__(self):
+        return f"\"{self.value}\""
+    
+    

@@ -39,6 +39,21 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by JurjenLangParser#func_params.
+    def visitFunc_params(self, ctx:JurjenLangParser.Func_paramsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#func_call_params_single.
+    def visitFunc_call_params_single(self, ctx:JurjenLangParser.Func_call_params_singleContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#func_call_params_multiple.
+    def visitFunc_call_params_multiple(self, ctx:JurjenLangParser.Func_call_params_multipleContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by JurjenLangParser#scope.
     def visitScope(self, ctx:JurjenLangParser.ScopeContext):
         return self.visitChildren(ctx)
@@ -171,6 +186,11 @@ class JurjenLangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by JurjenLangParser#e_negation.
     def visitE_negation(self, ctx:JurjenLangParser.E_negationContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#e_func.
+    def visitE_func(self, ctx:JurjenLangParser.E_funcContext):
         return self.visitChildren(ctx)
 
 

@@ -7,7 +7,9 @@ from src.values.JLString import *
 from src.values.IValue import *
 from src.scope.ScopeStack import *
 from src.scope.Scope import *
+from src.scope.Returner import *
 from src.variable.Function import *
+from src.scope.Debugger import *
 from src.expression.NumericalExpression import *
 from src.expression.BooleanExpression import *
 from src.antlr_parsing.ChildParser import *
@@ -15,6 +17,7 @@ from src.antlr_parsing.ChildParser import *
 class JurjenLangCustomVisitor(JurjenLangVisitor):
     def __init__(self):
         self.scope_stack = ScopeStack()
+        self.debug = Debugger(enabled=False)
 
     # Types
     def visitInteger(self, ctx:JurjenLangParser.IntegerContext):
@@ -206,15 +209,64 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         return variable.value
 
     # Scope
+    def _visit_scope_children(self, scopectx):
+        returner = EmptyReturner()
+
+        child_count = scopectx.getChildCount()
+        for i in range(child_count):
+            child = scopectx.getChild(i)
+            # return detection
+            res = self.visit(child)
+            self.debug.r(f"SCOPECHILD: checking res={str(res)}({type(child)}) in context {str(scopectx)}")
+
+            if Returner.is_returner(res):
+                self.debug.r(f"SCOPECHILD: found returner {str(res)} in context {str(scopectx)}")
+                returner = res
+                break
+
+        return returner
+    
+    def visitFunc_return(self, ctx:JurjenLangParser.Func_returnContext):
+        retstat = self.visit(ctx.getChild(1))
+        self.debug.r(f"FUNCRETURN: packing {repr(retstat)} into returner in context {ctx.getText()}")
+        return Returner(retstat)
+
     def visitGlobalscope(self, ctx:JurjenLangParser.GlobalscopeContext):
         self.scope_stack.push()
-        self.visitChildren(ctx)
+        self._visit_scope_children(ctx) # Nothing is done with returned value in global scope
         self.scope_stack.pop()
 
+    floating_scope_variables: list[IVariable] = None 
+    scope_accepts_returner = False
     def visitScope(self, ctx:JurjenLangParser.ScopeContext):
         self.scope_stack.push()
-        self.visitChildren(ctx) 
+        
+        # Obtaining parameters to put in scope
+        if self.floating_scope_variables is not None:
+            scope = self.scope_stack.latest()
+            for var in self.floating_scope_variables:
+                scope.add_local_variable(var)
+
+            self.floating_scope_variables = None
+        
+        # Set unpacking returner mode
+        this_scope_accepts_returner = False
+        if self.scope_accepts_returner:
+            self.debug.r(f"SCOPE: Will unpack returner in context: '{str(ctx)}'")
+            this_scope_accepts_returner = True
+            self.scope_accepts_returner = False
+
+        # Call contents of scope
+        returner = self._visit_scope_children(ctx)
         self.scope_stack.pop()
+
+        # Unpack if return if in unpacking mode
+        if this_scope_accepts_returner:
+            self.debug.r(f"SCOPE: Unpacking {str(returner)} into {repr(returner.get_value())}")
+            return returner.get_value()
+
+        self.debug.r(f"SCOPE: Passing {str(returner)}")
+        return returner
     
     def visitPrintscopestat(self, ctx:JurjenLangParser.PrintscopestatContext):
         scope = self.scope_stack.latest()
@@ -222,38 +274,54 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
 
     # If chains
     def visitIfchain(self, ctx:JurjenLangParser.IfchainContext):
-        executed = self.visit(ctx.ifchain_if)
-        if executed: return self
+        returned = self.visit(ctx.ifchain_if)
+        if returned is not None: 
+            self.debug.r(f"IFCHAIN: Returning {returned}")
+            return returned
 
-        executed = self.visit(ctx.ifchain_elifs)
-        if executed: return self
+        returned = self.visit(ctx.ifchain_elifs)
+        if returned is not None: return returned
         
-        self.visit(ctx.ifchain_else)
-        return self
+        returned = self.visit(ctx.ifchain_else)
+        return returned
     
     def visitElifstat_chain(self, ctx:JurjenLangParser.Elifstat_chainContext):
         children = ctx.getChildren()
         executed = False
+        returned = None
         for child in children:
-            executed = self.visit(child)
-            if executed: break
-        return executed
+            ret = self.visit(child)
+            if ret is not None:
+                returned = ret
+                break
+        return returned
 
     def visitIfstat(self, ctx:JurjenLangParser.IfstatContext):
         bool_expr = self.visit(ctx.expr)
 
         if bool(bool_expr):
-            self.visit(ctx.scope())
+            res = self.visit(ctx.scope())
+            # self.debug.r(f"IFSTAT: Returning {res}")
+            return res
         
-        return bool(bool_expr)
+        return None
 
     def visitElifstat(self, ctx:JurjenLangParser.ElifstatContext):
         bool_expr = self.visit(ctx.expr)
 
         if bool_expr:
             self.visit(ctx.scope())
+            return self.visit(ctx.scope())
         
-        return bool(bool_expr)
+        return None
+
+    def visitStats(self, ctx:JurjenLangParser.StatsContext):
+        for i in range(ctx.getChildCount()):
+            res = self.visit(ctx.getChild(i))
+            if Returner.is_returner(res):
+                self.debug.r(f"STAT: found returner {res}")
+                return res
+        return None
 
     # While
     def visitWhileloop(self, ctx:JurjenLangParser.WhileloopContext):
@@ -273,17 +341,58 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
     floating_function_context = None
 
     def visitFunc(self, ctx:JurjenLangParser.FuncContext):
-        self.floating_function_context = ctx.getChild(1)    # Scope, dont immediately execute
+        self.floating_function_context = ctx.getChild(1)    # Scope, dont immediately execute, Floating_function_context is immediately used by the scope
         self.visit(ctx.getChild(0))                         # Function definition
 
     def visitFunc_def(self, ctx:JurjenLangParser.Func_defContext):
         func_name = str(ctx.getChild(1))
-        function = Function(func_name, self.floating_function_context)
+        func_params = [str(p) for p in ctx.getChild(2).getChildren()]
+
+        function = Function(func_name, func_params, self.floating_function_context)
         self.floating_function_context = None
 
         self.scope_stack.latest().add_local_variable(function)
 
     def visitFunc_call(self, ctx:JurjenLangParser.Func_callContext):
         func_name = str(ctx.getChild(0))
+        params = self.visit(ctx.getChild(2))
+
         function = self.scope_stack.latest().get_variable(func_name)
-        self.visit(function.get_value())
+        if function is None or type(function) is not Function:
+            raise ValueError(f"The function '{func_name}' does not exist")
+
+        required_params = function.get_parameter_names()
+        required_params_length = len(required_params)
+        given_params_length = len(params)
+        if required_params_length != given_params_length:
+            raise ValueError(f"The function requires exactly {required_params_length} parameter" + ("s" if required_params_length != 1 else "") + f", while {given_params_length} " + ("were" if given_params_length != 1 else "was") +  " given")
+        
+        variables = list()
+        for i in range(given_params_length):
+            v_name = required_params[i]
+            v_value = params[i]
+            variables += [Variable(v_name, v_value)]
+
+        self.floating_scope_variables = variables  # Communicating parameters to function scope
+        self.scope_accepts_returner = True
+        func_ref = function.get_value()
+        returned = self.visit(func_ref)
+        self.debug.r(f"FUNCCALL: Received {repr(returned)} from function {str(func_ref)}")
+        return returned
+
+    def visitFunc_call_params_single(self, ctx:JurjenLangParser.Func_call_params_singleContext):
+        if ctx.getChildCount() == 0:
+            return None
+        return [self.visit(ctx.getChild(0))]
+
+    def visitFunc_call_params_multiple(self, ctx:JurjenLangParser.Func_call_params_multipleContext):
+        params = list()
+        childcount = ctx.getChildCount()
+        
+        i = 0
+        while i < childcount:
+            p = self.visit(ctx.getChild(i))
+            params += [p]
+            i+=2
+
+        return params

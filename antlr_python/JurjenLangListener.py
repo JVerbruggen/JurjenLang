@@ -62,6 +62,33 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JurjenLangParser#func_params.
+    def enterFunc_params(self, ctx:JurjenLangParser.Func_paramsContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#func_params.
+    def exitFunc_params(self, ctx:JurjenLangParser.Func_paramsContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#func_call_params_single.
+    def enterFunc_call_params_single(self, ctx:JurjenLangParser.Func_call_params_singleContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#func_call_params_single.
+    def exitFunc_call_params_single(self, ctx:JurjenLangParser.Func_call_params_singleContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#func_call_params_multiple.
+    def enterFunc_call_params_multiple(self, ctx:JurjenLangParser.Func_call_params_multipleContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#func_call_params_multiple.
+    def exitFunc_call_params_multiple(self, ctx:JurjenLangParser.Func_call_params_multipleContext):
+        pass
+
+
     # Enter a parse tree produced by JurjenLangParser#scope.
     def enterScope(self, ctx:JurjenLangParser.ScopeContext):
         pass
@@ -302,6 +329,15 @@ class JurjenLangListener(ParseTreeListener):
 
     # Exit a parse tree produced by JurjenLangParser#e_negation.
     def exitE_negation(self, ctx:JurjenLangParser.E_negationContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#e_func.
+    def enterE_func(self, ctx:JurjenLangParser.E_funcContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#e_func.
+    def exitE_func(self, ctx:JurjenLangParser.E_funcContext):
         pass
 
 
