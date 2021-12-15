@@ -47,7 +47,7 @@ result = myfunction(1,2)    # will be 3
 ```
 In JurjenLang, variables have no type definition or hinting. This can either make your life easy or difficult, depending on who you ask. Either way, I don't really care.
 
-## Pass function as a parameter
+### Pass function as a parameter
 ```
 func printstringone {
     print "one"
