@@ -1,2 +1,2 @@
-py .\project.py input.jur
+py .\project.py test.jur
 PAUSE
