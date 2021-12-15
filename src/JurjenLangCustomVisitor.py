@@ -9,6 +9,7 @@ from src.scope.ScopeStack import *
 from src.scope.Scope import *
 from src.scope.Returner import *
 from src.variable.Function import *
+from src.variable.FunctionReference import *
 from src.scope.Debugger import *
 from src.expression.NumericalExpression import *
 from src.expression.BooleanExpression import *
@@ -17,7 +18,7 @@ from src.antlr_parsing.ChildParser import *
 class JurjenLangCustomVisitor(JurjenLangVisitor):
     def __init__(self):
         self.scope_stack = ScopeStack()
-        self.debug = Debugger(enabled=False)
+        self.debug = Debugger(r_enabled=False, p_enabled=False)
 
     # Types
     def visitInteger(self, ctx:JurjenLangParser.IntegerContext):
@@ -206,7 +207,7 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
     def visitE_variable(self, ctx:JurjenLangParser.E_variableContext):
         name = self.visit(ctx.name)
         variable = self.scope_stack.latest().get_variable(name)
-        return variable.value
+        return variable.get_value()
 
     # Scope
     def _visit_scope_children(self, scopectx):
@@ -245,7 +246,12 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         if self.floating_scope_variables is not None:
             scope = self.scope_stack.latest()
             for var in self.floating_scope_variables:
-                scope.add_local_variable(var)
+                adding_var = var
+                if type(var) is FunctionReference:
+                    func_name = var.get_value()
+                    adding_var = scope.get_variable(func_name).renamed_clone(var.get_name())
+                    self.debug.p(f"PARAM: REFERE {func_name}, change to func {adding_var}")
+                scope.add_local_variable(adding_var)
 
             self.floating_scope_variables = None
         
@@ -357,13 +363,14 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         func_name = str(ctx.getChild(0))
         params = self.visit(ctx.getChild(2))
 
-        function = self.scope_stack.latest().get_variable(func_name)
+        latest_scope = self.scope_stack.latest()
+        function = latest_scope.get_variable(func_name)
         if function is None or type(function) is not Function:
             raise ValueError(f"The function '{func_name}' does not exist")
 
         required_params = function.get_parameter_names()
         required_params_length = len(required_params)
-        given_params_length = len(params)
+        given_params_length = len(params) if params is not None else 0
         if required_params_length != given_params_length:
             raise ValueError(f"The function requires exactly {required_params_length} parameter" + ("s" if required_params_length != 1 else "") + f", while {given_params_length} " + ("were" if given_params_length != 1 else "was") +  " given")
         
@@ -371,7 +378,15 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         for i in range(given_params_length):
             v_name = required_params[i]
             v_value = params[i]
-            variables += [Variable(v_name, v_value)]
+            self.debug.p(f"PARAM: adding {v_name} val:({type(v_value)})")
+
+            adding_var = Variable(v_name, v_value)
+            if type(v_value) is FunctionReference:
+                v_value.inscope_name = v_name
+                adding_var = v_value
+                
+            self.debug.p(f"PARAM: adding={adding_var}")
+            variables += [adding_var]
 
         self.floating_scope_variables = variables  # Communicating parameters to function scope
         self.scope_accepts_returner = True
@@ -380,10 +395,23 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         self.debug.r(f"FUNCCALL: Received {repr(returned)} from function {str(func_ref)}")
         return returned
 
+    def _handle_param_child_and_visit(self, child):
+        func_name = child.getText()
+        self.debug.p(f"PARAM: potentialfunc={func_name}")
+
+        visited_child = self.visit(child)
+        returning_child = visited_child
+        if not issubclass(type(visited_child), IValue):
+            self.debug.p(f"PARAM: Detected Function!, with name {func_name}, inscope: {type(child)}")
+            returning_child = FunctionReference(func_name)
+
+        self.debug.p(f"PARAM: child={type(returning_child)}")
+        return returning_child
+
     def visitFunc_call_params_single(self, ctx:JurjenLangParser.Func_call_params_singleContext):
         if ctx.getChildCount() == 0:
             return None
-        return [self.visit(ctx.getChild(0))]
+        return [self._handle_param_child_and_visit(ctx.getChild(0))]
 
     def visitFunc_call_params_multiple(self, ctx:JurjenLangParser.Func_call_params_multipleContext):
         params = list()
@@ -391,7 +419,7 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         
         i = 0
         while i < childcount:
-            p = self.visit(ctx.getChild(i))
+            p = self._handle_param_child_and_visit(ctx.getChild(i))
             params += [p]
             i+=2
 

@@ -10,3 +10,6 @@ class IVariable:
 
     def __repr__(self):
         return self.__str__()
+
+    def renamed_clone(self, new_name: str):
+        raise NotImplementedError()

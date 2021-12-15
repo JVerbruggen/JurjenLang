@@ -17,3 +17,6 @@ class Function(IVariable):
 
     def __str__(self):
         return f"{type(self)} {self.get_name()}:{self.get_value()} params:[{ ','.join(self.parameters) }]"
+
+    def renamed_clone(self, new_name) -> 'Function':
+        return Function(new_name, self.parameters, self.context)

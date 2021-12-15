@@ -1,21 +1,14 @@
-func fact x{
-    printscope
-    if x < 2{
-        return 1
-    }
-    return fact(x-1) * x
+func printstringone {
+    print "one"
 }
 
-func fib x{
-    if x < 2{
-        return 1
-    }
-    return fib(x-1) + fib(x-2)
+func printstringtwo {
+    print "two"
 }
 
-func dosomeprinting x{
-    print x
+func printspec printfunction {
+    printfunction()
 }
 
-var = fib(1)
-dosomeprinting(var)
+printspec(printstringone)
+printspec(printstringtwo)
