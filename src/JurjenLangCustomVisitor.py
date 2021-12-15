@@ -26,7 +26,10 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         return JLInteger(val)
     
     def visitString(self, ctx:JurjenLangParser.StringContext):
-        val = StringParser.parse(ctx.getChild(1))
+        val = StringParser.parse(ctx.getChild(0))
+        val = val[1:-1]
+        val = val.replace("\\n", "\n")
+        val = val.replace("\\\"", "\"")
         return JLString(val)
     
     def _float_logic(self, ctx, child_count_check, do_pre=True, do_post=True, pre_nrs_loc=0, post_nrs_loc=2):

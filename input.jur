@@ -9,7 +9,7 @@ print x*2
 print x
 print "hallo"
 
-mijnstring = "bas"
+mijnstring = "bas is cool"
 print mijnstring*10
 print mijnstring*-2
 
@@ -68,3 +68,8 @@ func test{
 print "wowowowow"
 
 test()
+
+basvar = "bas " + "is "
+print basvar + "bas"
+
+print "hallo\n\"bas\""

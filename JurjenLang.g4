@@ -92,7 +92,7 @@ float_type  : SYMB_MINUS? pre_nrs=NUMBERS SYMB_DOT post_nrs=NUMBERS FLOAT_IDENT 
             ;
 
 integer     : (SYMB_MINUS)? NUMBERS                     ;
-string      : SYMB_DQUOTE IDENTIFIER SYMB_DQUOTE        ;
+string      : STR_CONTENT     ;
 
 any_value   : float_type
             | integer
@@ -141,7 +141,20 @@ PAR_CLOSE       : ')'   ;
 BRACK_OPEN      : '{'   ;
 BRACK_CLOSE     : '}'   ;
 IDENTIFIER      : ('a' .. 'z' | 'A' .. 'Z') ('a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_')*   ;
+STR_CONTENT     : '"' ( ESC_SEQ | ~('\\'|'"') )* '"'  ;
 WS              : [ \t\r\n]+ -> skip    ;
+
+fragment HEX_DIGIT : ('0'..'9'|'a'..'f'|'A'..'F') ;
+
+fragment ESC_SEQ
+    :   '\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')
+    |   UNICODE_ESC
+    ;
+
+
+fragment UNICODE_ESC
+    :   '\\' 'u' HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT
+    ;
 
 fragment DIGIT  : '0' .. '9'    ;
 fragment BIT    : '0' .. '1'    ;
