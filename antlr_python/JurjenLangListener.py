@@ -17,6 +17,15 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JurjenLangParser#globalscope.
+    def enterGlobalscope(self, ctx:JurjenLangParser.GlobalscopeContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#globalscope.
+    def exitGlobalscope(self, ctx:JurjenLangParser.GlobalscopeContext):
+        pass
+
+
     # Enter a parse tree produced by JurjenLangParser#func.
     def enterFunc(self, ctx:JurjenLangParser.FuncContext):
         pass
@@ -44,6 +53,15 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JurjenLangParser#func_call.
+    def enterFunc_call(self, ctx:JurjenLangParser.Func_callContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#func_call.
+    def exitFunc_call(self, ctx:JurjenLangParser.Func_callContext):
+        pass
+
+
     # Enter a parse tree produced by JurjenLangParser#scope.
     def enterScope(self, ctx:JurjenLangParser.ScopeContext):
         pass
@@ -68,6 +86,24 @@ class JurjenLangListener(ParseTreeListener):
 
     # Exit a parse tree produced by JurjenLangParser#stat.
     def exitStat(self, ctx:JurjenLangParser.StatContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#debugtools.
+    def enterDebugtools(self, ctx:JurjenLangParser.DebugtoolsContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#debugtools.
+    def exitDebugtools(self, ctx:JurjenLangParser.DebugtoolsContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#printscopestat.
+    def enterPrintscopestat(self, ctx:JurjenLangParser.PrintscopestatContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#printscopestat.
+    def exitPrintscopestat(self, ctx:JurjenLangParser.PrintscopestatContext):
         pass
 
 

@@ -14,6 +14,11 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by JurjenLangParser#globalscope.
+    def visitGlobalscope(self, ctx:JurjenLangParser.GlobalscopeContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by JurjenLangParser#func.
     def visitFunc(self, ctx:JurjenLangParser.FuncContext):
         return self.visitChildren(ctx)
@@ -29,6 +34,11 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by JurjenLangParser#func_call.
+    def visitFunc_call(self, ctx:JurjenLangParser.Func_callContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by JurjenLangParser#scope.
     def visitScope(self, ctx:JurjenLangParser.ScopeContext):
         return self.visitChildren(ctx)
@@ -41,6 +51,16 @@ class JurjenLangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by JurjenLangParser#stat.
     def visitStat(self, ctx:JurjenLangParser.StatContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#debugtools.
+    def visitDebugtools(self, ctx:JurjenLangParser.DebugtoolsContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#printscopestat.
+    def visitPrintscopestat(self, ctx:JurjenLangParser.PrintscopestatContext):
         return self.visitChildren(ctx)
 
 

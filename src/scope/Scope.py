@@ -1,21 +1,23 @@
+from src.variable.IVariable import *
 from src.variable.Variable import *
+from src.variable.Function import *
 
 class Scope:
     def __init__(self, parent_scope:'Scope'=None):
         self.parent_scope = parent_scope
-        self.local_variables = list[Variable]()
+        self.local_variables = list[IVariable]()
 
-    def get_variable_locally(self, name: str) -> Variable:
+    def get_variable_locally(self, name: str) -> IVariable:
         variable = None
 
         for local_variable in self.local_variables:
-            local_var_name = local_variable.name
+            local_var_name = local_variable.get_name()
             if local_var_name == name:
                 variable = local_variable
 
         return variable
 
-    def get_variable(self, name: str) -> Variable:
+    def get_variable(self, name: str) -> IVariable:
         variable = None
         if self.parent_scope is not None:
             variable = self.parent_scope.get_variable(name)
@@ -26,11 +28,11 @@ class Scope:
         
         return variable
 
-    def remove_variable_locally(self, variable: Variable):
+    def remove_variable_locally(self, variable: IVariable):
         self.local_variables.remove(variable)
 
-    def add_local_variable(self, variable: Variable):
-        already_locally_defined = self.get_variable_locally(variable.name)
+    def add_local_variable(self, variable: IVariable):
+        already_locally_defined = self.get_variable_locally(variable.get_name())
         if already_locally_defined is not None:
             self.remove_variable_locally(already_locally_defined)
 
@@ -41,5 +43,5 @@ class Scope:
             del var
 
     def __str__(self):
-        local_var_str = ',\n         '.join([f"{variable.name}:{variable.value}" for variable in self.local_variables])
+        local_var_str = ',\n         '.join([f"{type(variable)} {variable.get_name()}:{variable.get_value()}" for variable in self.local_variables])
         return " Scope: {" + local_var_str + "}"

@@ -7,6 +7,7 @@ from src.values.JLString import *
 from src.values.IValue import *
 from src.scope.ScopeStack import *
 from src.scope.Scope import *
+from src.variable.Function import *
 from src.expression.NumericalExpression import *
 from src.expression.BooleanExpression import *
 from src.antlr_parsing.ChildParser import *
@@ -202,10 +203,19 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         return variable.value
 
     # Scope
+    def visitGlobalscope(self, ctx:JurjenLangParser.GlobalscopeContext):
+        self.scope_stack.push()
+        self.visitChildren(ctx)
+        self.scope_stack.pop()
+
     def visitScope(self, ctx:JurjenLangParser.ScopeContext):
         self.scope_stack.push()
         self.visitChildren(ctx) 
         self.scope_stack.pop()
+    
+    def visitPrintscopestat(self, ctx:JurjenLangParser.PrintscopestatContext):
+        scope = self.scope_stack.latest()
+        print(str(scope))
 
     # If chains
     def visitIfchain(self, ctx:JurjenLangParser.IfchainContext):
@@ -255,3 +265,22 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
             raise ValueError("Assertion Error!")
         
         return True
+
+    # Functions
+    floating_function_context = None
+
+    def visitFunc(self, ctx:JurjenLangParser.FuncContext):
+        self.floating_function_context = ctx.getChild(1)    # Scope, dont immediately execute
+        self.visit(ctx.getChild(0))                         # Function definition
+
+    def visitFunc_def(self, ctx:JurjenLangParser.Func_defContext):
+        func_name = str(ctx.getChild(1))
+        function = Function(func_name, self.floating_function_context)
+        self.floating_function_context = None
+
+        self.scope_stack.latest().add_local_variable(function)
+
+    def visitFunc_call(self, ctx:JurjenLangParser.Func_callContext):
+        func_name = str(ctx.getChild(0))
+        function = self.scope_stack.latest().get_variable(func_name)
+        self.visit(function.get_value())

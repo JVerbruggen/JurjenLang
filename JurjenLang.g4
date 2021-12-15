@@ -1,20 +1,30 @@
 grammar JurjenLang ;
-startRule: func EOF ;
+startRule: globalscope EOF ;
+
+globalscope     : (func | stat)*
+                ;
 
 func        : func_def scope        ;
 func_def    : FUNC_KW IDENTIFIER    ;
 func_return : FUNC_RET retstat      ;
+func_call   : IDENTIFIER PAR_OPEN PAR_CLOSE     ;
 
 scope   : BRACK_OPEN stats func_return? BRACK_CLOSE ;
 
 stats   : stat*     ;
 stat    : assignment
-        | printstat
+        | debugtools
         | ifchain
         | assertion
         | whileloop
+        | func_call
         ;
 
+debugtools      : printstat
+                | printscopestat
+                ;
+
+printscopestat  : PRINTSCOPE_KW         ;
 printstat   : PRINT_KW expr=assignable  ;
 retstat     : expr = assignable         ;
 
@@ -91,10 +101,11 @@ any_value   : float_type
 
 NUMBERS : DIGIT+ ;
 
-FUNC_KW     : 'func'    ;
-FUNC_RET    : 'return'  ;
-PRINT_KW    : 'print'   ;
-ASSERT_KW   : 'assert'  ;
+FUNC_KW         : 'func'            ;
+FUNC_RET        : 'return'          ;
+PRINTSCOPE_KW   : 'printscope'      ;
+PRINT_KW        : 'print'           ;
+ASSERT_KW       : 'assert'          ;
 
 IF_KW       : 'if'      ;
 ELIF_KW     : 'elif'    ;
