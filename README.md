@@ -20,7 +20,7 @@ If you made changes to the language or anything else, and the python files (and 
 
 ## Testrig
 
-To use the antlr4 testrig, use the following tutorial:
+To use the antlr4 testrig (which generates a parse tree), use the following tutorial:
 1. Renew java files `start .\generate_java.bat`
 2. Navigate to the java/ file `cd java`
 3. `start .\testrig.bat` should open a command window and eventually open up the testrig
