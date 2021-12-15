@@ -4,7 +4,8 @@
 <br>
 <br>
 
-To execute, follow the following steps
+## Getting started
+Follow these three steps on your computer to get started
 1. `git clone https://github.com/JVerbruggen/JurjenLang.git`
 2. `py -m pip install antlr4-python3-runtime`
 3. `start input.bat` or `py project.py .\input.jur`
