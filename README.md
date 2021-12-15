@@ -47,6 +47,25 @@ result = myfunction(1,2)    # will be 3
 ```
 In JurjenLang, variables have no type definition or hinting. This can either make your life easy or difficult, depending on who you ask. Either way, I don't really care.
 
+## Pass function as a parameter
+```
+func printstringone {
+    print "one"
+}
+
+func printstringtwo {
+    print "two"
+}
+
+func printspec printfunction {
+    printfunction()
+}
+
+printspec(printstringone)     # prints 'one'
+printspec(printstringtwo)     # prints 'one'
+```
+In JurjenLang, you can pass a reference to a function as a parameter. This reference can then be executed as if it is a function itself.
+
 ### Expressions
 ```
 a = 2
