@@ -34,7 +34,7 @@ another = .2f
 thirdvar = "some random text"
 fourthboolean = true
 ```
-Currently, only four types are allowed; integer, float, string and boolean. Why would you ever wawnt more? ...Right?
+Currently, only four types are allowed; integer, float, string and boolean. Why would you ever want more? ...Right?
 
 ### Define a function
 ```
@@ -63,7 +63,7 @@ thiswillbetrue = true and true
 thiswillbetrue = true or false
 thiswillbefalse = not true
 ```
-JurjenLang supports three bollean expressions; and, or, not
+JurjenLang supports three boolean expressions; and, or, not
 
 ### Numerical operators
 ```
