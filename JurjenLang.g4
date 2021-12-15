@@ -22,6 +22,7 @@ stat    : assignment
         | assertion
         | whileloop
         | func_return
+        | func_call
         ;
 
 debugtools      : printstat

@@ -13,4 +13,9 @@ func fib x{
     return fib(x-1) + fib(x-2)
 }
 
-print fib(20)
+func dosomeprinting x{
+    print x
+}
+
+var = fib(1)
+dosomeprinting(var)
