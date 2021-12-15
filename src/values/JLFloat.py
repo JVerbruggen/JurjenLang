@@ -38,11 +38,6 @@ class JLFloat(INumericalValue):
         if issubclass(type(other), type(INumericalValue)):
             raise TypeError("JLFloat can only be powered to other numerical values")
         return JLFloat(self.value ** other.get_value())
-
-    def __eq__(self, other):
-        if type(other) is not JLFloat:
-            raise TypeError("JLFloat can only compare to other JLFloat")
-        return JLBoolean(self.value == other.value)
         
     def factorial(self):
         res = 1

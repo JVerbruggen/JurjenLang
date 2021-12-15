@@ -47,11 +47,6 @@ class JLInteger(INumericalValue):
         if type(other) is not JLInteger:
             return JLFloat(self.value ** other.get_value())
         return JLInteger(self.value ** other.get_value())
-
-    def __eq__(self, other):
-        if type(other) is not JLInteger:
-            raise TypeError("JLInteger can only compare to other JLInteger")
-        return JLBoolean(self.value == other.value)
         
     def factorial(self):
         res = 1

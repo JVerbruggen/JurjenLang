@@ -89,6 +89,15 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JurjenLangParser#whileloop.
+    def enterWhileloop(self, ctx:JurjenLangParser.WhileloopContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#whileloop.
+    def exitWhileloop(self, ctx:JurjenLangParser.WhileloopContext):
+        pass
+
+
     # Enter a parse tree produced by JurjenLangParser#ifchain.
     def enterIfchain(self, ctx:JurjenLangParser.IfchainContext):
         pass
@@ -356,6 +365,24 @@ class JurjenLangListener(ParseTreeListener):
 
     # Exit a parse tree produced by JurjenLangParser#boolean_false.
     def exitBoolean_false(self, ctx:JurjenLangParser.Boolean_falseContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#comparison.
+    def enterComparison(self, ctx:JurjenLangParser.ComparisonContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#comparison.
+    def exitComparison(self, ctx:JurjenLangParser.ComparisonContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#bool_comparison.
+    def enterBool_comparison(self, ctx:JurjenLangParser.Bool_comparisonContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#bool_comparison.
+    def exitBool_comparison(self, ctx:JurjenLangParser.Bool_comparisonContext):
         pass
 
 

@@ -7,6 +7,8 @@ from src.values.JLString import *
 from src.values.IValue import *
 from src.scope.ScopeStack import *
 from src.scope.Scope import *
+from src.expression.NumericalExpression import *
+from src.expression.BooleanExpression import *
 from src.antlr_parsing.ChildParser import *
 
 class JurjenLangCustomVisitor(JurjenLangVisitor):
@@ -142,14 +144,38 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
     def visitBool_e_expressions(self, ctx:JurjenLangParser.Bool_e_expressionsContext):
         left = self.visit(ctx.left)
         right = self.visit(ctx.right)
+        oper = self.visit(ctx.oper)
 
-        return left == right
+        return oper.result(left, right)
+    
+    def visitComparison(self, ctx:JurjenLangParser.ComparisonContext):
+        op = str(ctx.getChild(0))
+
+        if op == "==":      return EqualsExpressionNumerical()
+        elif op == "!=":    return NotEqualsExpressionNumerical()
+        elif op == "<":     return LessThanExpressionNumerical()
+        elif op == "<=":    return LessEqualsExpressionNumerical()
+        elif op == ">":     return MoreThanExpressionNumerical()
+        elif op == ">=":    return MoreEqualsExpressionNumerical()
+        
+        raise NotImplementedError("Unknown numerical comparison")
 
     def visitBool_e_expressions_bools(self, ctx:JurjenLangParser.Bool_e_expressions_boolsContext):
         left = self.visit(ctx.left)
         right = self.visit(ctx.right)
+        oper = self.visit(ctx.oper)
 
-        return left == right
+        return oper.result(left, right)
+
+    def visitBool_comparison(self, ctx:JurjenLangParser.Bool_comparisonContext):
+        op = str(ctx.getChild(0))
+
+        if op == "==":
+            return EqualsExpressionBoolean()
+        elif op == "!=":
+            return NotEqualsExpressionBoolean()
+
+        raise NotImplementedError("Unknown boolean comparison")
 
     def visitBool_parentheses(self, ctx:JurjenLangParser.Bool_parenthesesContext):
         return self.visit(ctx.bool_expr)
@@ -215,6 +241,11 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
             self.visit(ctx.scope())
         
         return bool(bool_expr)
+
+    # While
+    def visitWhileloop(self, ctx:JurjenLangParser.WhileloopContext):
+        while self.visit(ctx.expr):
+            self.visit(ctx.scope())
 
     # Assertions
     def visitAssertion(self, ctx:JurjenLangParser.AssertionContext):

@@ -12,10 +12,13 @@ stat    : assignment
         | printstat
         | ifchain
         | assertion
+        | whileloop
         ;
 
 printstat   : PRINT_KW expr=assignable  ;
 retstat     : expr = assignable         ;
+
+whileloop   : WHILE_KW expr=bool_e scope     ;
 
 ifchain     : ifchain_if=ifstat ifchain_elifs=elifstat_chain ifchain_else=maybe_elsestat  ;
 ifstat      : IF_KW expr=bool_e scope        ;
@@ -44,19 +47,31 @@ e   : PAR_OPEN expr=e PAR_CLOSE             # e_parentheses
     | value=any_value                       # e_any_value
     ;
 
-bool_e  : PAR_OPEN bool_expr=bool_e PAR_CLOSE   # bool_parentheses
-        | left=bool_e AND_KW right=bool_e   # bool_e_and
-        | left=bool_e OR_KW right=bool_e    # bool_e_or
-        | NOT_KW bool_expr=bool_e           # bool_e_not
-        | left=e EQUALS right=e             # bool_e_expressions
-        | left=bool_e EQUALS right=bool_e   # bool_e_expressions_bools
-        | value=boolean                     # bool_e_boolean
-        | name=variable                     # bool_e_variable
+bool_e  : PAR_OPEN bool_expr=bool_e PAR_CLOSE                   # bool_parentheses
+        | left=bool_e AND_KW right=bool_e                       # bool_e_and
+        | left=bool_e OR_KW right=bool_e                        # bool_e_or
+        | NOT_KW bool_expr=bool_e                               # bool_e_not
+        | left=e oper=comparison right=e                        # bool_e_expressions
+        | left=bool_e oper=bool_comparison right=bool_e         # bool_e_expressions_bools
+        | value=boolean                                         # bool_e_boolean
+        | name=variable                                         # bool_e_variable
         ;
 
 boolean     : TRUE_KW   # boolean_true
             | FALSE_KW  # boolean_false
             ;
+
+comparison      : EQUALS
+                | ISNOT
+                | LESSTHAN
+                | LESSEQUALS
+                | MORETHAN
+                | MOREEQUALS
+                ;
+
+bool_comparison : EQUALS
+                | ISNOT
+                ;
 
 variable    : IDENTIFIER ;
 float_type  : SYMB_MINUS? pre_nrs=NUMBERS SYMB_DOT post_nrs=NUMBERS FLOAT_IDENT         # float_by_dot_and_ident
@@ -84,6 +99,7 @@ ASSERT_KW   : 'assert'  ;
 IF_KW       : 'if'      ;
 ELIF_KW     : 'elif'    ;
 ELSE_KW     : 'else'    ;
+WHILE_KW    : 'while'   ;
 
 TRUE_KW     : 'true'    ;
 FALSE_KW    : 'false'   ;
@@ -92,6 +108,12 @@ AND_KW      : 'and'     ;
 OR_KW       : 'or'      ;
 NOT_KW      : 'not'     ;
 
+EQUALS          : '=='  ;
+ISNOT           : '!='  ;
+LESSEQUALS      : '<='  ;
+MOREEQUALS      : '>='  ;
+LESSTHAN        : '<'   ;
+MORETHAN        : '>'   ;
 SYMB_EXCLM      : '!'   ;
 SYMB_HAT        : '^'   ;
 SYMB_STAR       : '*'   ;
@@ -103,7 +125,6 @@ SYMB_DQUOTE     : '"'   ;
 SYMB_DOT        : '.'   ;
 FLOAT_IDENT     : 'f'   ;
 ASSIGN          : '='   ;
-EQUALS          : '=='  ;
 PAR_OPEN        : '('   ;
 PAR_CLOSE       : ')'   ;
 BRACK_OPEN      : '{'   ;

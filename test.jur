@@ -12,5 +12,44 @@ func test{
     assert 3-2 == 0 == false
     assert 3-2 == 1 == true
 
-    print "Success"
+    assert 1 < 2 == true
+    assert 1 < 1 == false
+    assert 1 < 0 == false
+
+    assert 2 <= 4 == true
+    assert 2 <= 3 == true
+    assert 2 <= 2 == true
+    assert 2 <= 1 == false
+
+    assert 2 > 4 == false
+    assert 2 > 3 == false
+    assert 2 > 2 == false
+    assert 2 > 1 == true
+
+    assert 2 >= 4 == false
+    assert 2 >= 3 == false
+    assert 2 >= 2 == true
+    assert 2 >= 1 == true
+
+    assert 2 != 3 == true
+    assert 2 != 2 == false
+    assert 2 != 2.0 == false
+
+    assert .2 > .3 == false
+    assert .2 > .2 == false
+    assert .2 > .1 == true
+
+    assert 2f == 2
+    assert 2 > 1.5
+    assert 2 > 1.999
+    assert 2 > 2.0 == false
+
+    i = 0
+    while i < 10{
+        i = i + 1
+    }
+    
+    assert i == 10
+
+    print "success"
 }

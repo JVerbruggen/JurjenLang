@@ -54,6 +54,11 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by JurjenLangParser#whileloop.
+    def visitWhileloop(self, ctx:JurjenLangParser.WhileloopContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by JurjenLangParser#ifchain.
     def visitIfchain(self, ctx:JurjenLangParser.IfchainContext):
         return self.visitChildren(ctx)
@@ -201,6 +206,16 @@ class JurjenLangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by JurjenLangParser#boolean_false.
     def visitBoolean_false(self, ctx:JurjenLangParser.Boolean_falseContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#comparison.
+    def visitComparison(self, ctx:JurjenLangParser.ComparisonContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#bool_comparison.
+    def visitBool_comparison(self, ctx:JurjenLangParser.Bool_comparisonContext):
         return self.visitChildren(ctx)
 
 

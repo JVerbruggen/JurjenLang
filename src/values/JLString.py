@@ -20,3 +20,9 @@ class JLString(IValue):
         
         res = ''.join([using_val for _ in range(repeat)])
         return JLString(res)
+
+    def __add__(self, other):
+        if type(other) is not JLString:
+            raise ValueError("JLString can only be added to another JLString")
+        
+        return JLString(self.value + other.value)

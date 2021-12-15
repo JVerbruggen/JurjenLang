@@ -22,5 +22,28 @@ func test{
     print .2+2
     print 2+.2
     print 2+2f-0.1
+    
+    i = 0
+    while i < 10{
+        print "whileloop"
+        i = i + 1
+    }
 
+    print mijnstring*-2+10
+    print 2
+
+    i = 0
+    basstring = "bas"
+    basstringworking = basstring
+    while i < 10{
+        print basstringworking
+
+        basstringworking = basstringworking*-1
+        basstring = basstring*-1
+
+        basstringworking = basstringworking + basstring
+
+
+        i = i + 1
+    }
 }
