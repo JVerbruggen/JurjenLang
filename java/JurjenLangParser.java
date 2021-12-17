@@ -759,11 +759,11 @@ public class JurjenLangParser extends Parser {
 		public WhileloopContext whileloop() {
 			return getRuleContext(WhileloopContext.class,0);
 		}
-		public Func_callContext func_call() {
-			return getRuleContext(Func_callContext.class,0);
-		}
 		public Func_returnContext func_return() {
 			return getRuleContext(Func_returnContext.class,0);
+		}
+		public Func_callContext func_call() {
+			return getRuleContext(Func_callContext.class,0);
 		}
 		public StatContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -830,14 +830,14 @@ public class JurjenLangParser extends Parser {
 				enterOuterAlt(_localctx, 6);
 				{
 				setState(130);
-				func_call();
+				func_return();
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
 				setState(131);
-				func_return();
+				func_call();
 				}
 				break;
 			}
@@ -1836,6 +1836,26 @@ public class JurjenLangParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	public static class E_funcContext extends EContext {
+		public Func_callContext e_func;
+		public Func_callContext func_call() {
+			return getRuleContext(Func_callContext.class,0);
+		}
+		public E_funcContext(EContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof JurjenLangListener ) ((JurjenLangListener)listener).enterE_func(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof JurjenLangListener ) ((JurjenLangListener)listener).exitE_func(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof JurjenLangVisitor ) return ((JurjenLangVisitor<? extends T>)visitor).visitE_func(this);
+			else return visitor.visitChildren(this);
+		}
+	}
 	public static class E_divisionContext extends EContext {
 		public EContext left;
 		public Token operator;
@@ -1878,7 +1898,7 @@ public class JurjenLangParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(193);
+			setState(194);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 			case 1:
@@ -1903,7 +1923,7 @@ public class JurjenLangParser extends Parser {
 				setState(189);
 				match(SYMB_MINUS);
 				setState(190);
-				((E_negationContext)_localctx).expr = e(3);
+				((E_negationContext)_localctx).expr = e(4);
 				}
 				break;
 			case 3:
@@ -1917,16 +1937,25 @@ public class JurjenLangParser extends Parser {
 				break;
 			case 4:
 				{
-				_localctx = new E_any_valueContext(_localctx);
+				_localctx = new E_funcContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(192);
+				((E_funcContext)_localctx).e_func = func_call();
+				}
+				break;
+			case 5:
+				{
+				_localctx = new E_any_valueContext(_localctx);
+				_ctx = _localctx;
+				_prevctx = _localctx;
+				setState(193);
 				((E_any_valueContext)_localctx).value = any_value();
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(214);
+			setState(215);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -1934,7 +1963,7 @@ public class JurjenLangParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(212);
+					setState(213);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
 					case 1:
@@ -1942,12 +1971,12 @@ public class JurjenLangParser extends Parser {
 						_localctx = new E_exponentContext(new EContext(_parentctx, _parentState));
 						((E_exponentContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_e);
-						setState(195);
-						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
 						setState(196);
-						((E_exponentContext)_localctx).operator = match(SYMB_HAT);
+						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
 						setState(197);
-						((E_exponentContext)_localctx).right = e(9);
+						((E_exponentContext)_localctx).operator = match(SYMB_HAT);
+						setState(198);
+						((E_exponentContext)_localctx).right = e(10);
 						}
 						break;
 					case 2:
@@ -1955,12 +1984,12 @@ public class JurjenLangParser extends Parser {
 						_localctx = new E_multiplyContext(new EContext(_parentctx, _parentState));
 						((E_multiplyContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_e);
-						setState(198);
-						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(199);
-						((E_multiplyContext)_localctx).operator = match(SYMB_STAR);
+						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
 						setState(200);
-						((E_multiplyContext)_localctx).right = e(8);
+						((E_multiplyContext)_localctx).operator = match(SYMB_STAR);
+						setState(201);
+						((E_multiplyContext)_localctx).right = e(9);
 						}
 						break;
 					case 3:
@@ -1968,12 +1997,12 @@ public class JurjenLangParser extends Parser {
 						_localctx = new E_divisionContext(new EContext(_parentctx, _parentState));
 						((E_divisionContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_e);
-						setState(201);
-						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(202);
-						((E_divisionContext)_localctx).operator = match(SYMB_SLASH);
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(203);
-						((E_divisionContext)_localctx).right = e(7);
+						((E_divisionContext)_localctx).operator = match(SYMB_SLASH);
+						setState(204);
+						((E_divisionContext)_localctx).right = e(8);
 						}
 						break;
 					case 4:
@@ -1981,12 +2010,12 @@ public class JurjenLangParser extends Parser {
 						_localctx = new E_additionContext(new EContext(_parentctx, _parentState));
 						((E_additionContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_e);
-						setState(204);
-						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
 						setState(205);
-						((E_additionContext)_localctx).operator = match(SYMB_PLUS);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(206);
-						((E_additionContext)_localctx).right = e(6);
+						((E_additionContext)_localctx).operator = match(SYMB_PLUS);
+						setState(207);
+						((E_additionContext)_localctx).right = e(7);
 						}
 						break;
 					case 5:
@@ -1994,12 +2023,12 @@ public class JurjenLangParser extends Parser {
 						_localctx = new E_subtractionContext(new EContext(_parentctx, _parentState));
 						((E_subtractionContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_e);
-						setState(207);
-						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
 						setState(208);
-						((E_subtractionContext)_localctx).operator = match(SYMB_MINUS);
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
 						setState(209);
-						((E_subtractionContext)_localctx).right = e(5);
+						((E_subtractionContext)_localctx).operator = match(SYMB_MINUS);
+						setState(210);
+						((E_subtractionContext)_localctx).right = e(6);
 						}
 						break;
 					case 6:
@@ -2007,16 +2036,16 @@ public class JurjenLangParser extends Parser {
 						_localctx = new E_factorialContext(new EContext(_parentctx, _parentState));
 						((E_factorialContext)_localctx).expr = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_e);
-						setState(210);
-						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
 						setState(211);
+						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
+						setState(212);
 						((E_factorialContext)_localctx).operator = match(SYMB_EXCLM);
 						}
 						break;
 					}
 					} 
 				}
-				setState(216);
+				setState(217);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
 			}
@@ -2249,7 +2278,7 @@ public class JurjenLangParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(230);
+			setState(231);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
 			case 1:
@@ -2258,11 +2287,11 @@ public class JurjenLangParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(218);
-				match(PAR_OPEN);
 				setState(219);
-				((Bool_parenthesesContext)_localctx).bool_expr = bool_e(0);
+				match(PAR_OPEN);
 				setState(220);
+				((Bool_parenthesesContext)_localctx).bool_expr = bool_e(0);
+				setState(221);
 				match(PAR_CLOSE);
 				}
 				break;
@@ -2271,9 +2300,9 @@ public class JurjenLangParser extends Parser {
 				_localctx = new Bool_e_notContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(222);
-				match(NOT_KW);
 				setState(223);
+				match(NOT_KW);
+				setState(224);
 				((Bool_e_notContext)_localctx).bool_expr = bool_e(5);
 				}
 				break;
@@ -2282,11 +2311,11 @@ public class JurjenLangParser extends Parser {
 				_localctx = new Bool_e_expressionsContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(224);
-				((Bool_e_expressionsContext)_localctx).left = e(0);
 				setState(225);
-				((Bool_e_expressionsContext)_localctx).oper = comparison();
+				((Bool_e_expressionsContext)_localctx).left = e(0);
 				setState(226);
+				((Bool_e_expressionsContext)_localctx).oper = comparison();
+				setState(227);
 				((Bool_e_expressionsContext)_localctx).right = e(0);
 				}
 				break;
@@ -2295,7 +2324,7 @@ public class JurjenLangParser extends Parser {
 				_localctx = new Bool_e_booleanContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(228);
+				setState(229);
 				((Bool_e_booleanContext)_localctx).value = boolean_type();
 				}
 				break;
@@ -2304,13 +2333,13 @@ public class JurjenLangParser extends Parser {
 				_localctx = new Bool_e_variableContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(229);
+				setState(230);
 				((Bool_e_variableContext)_localctx).name = variable();
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(244);
+			setState(245);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,18,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
@@ -2318,7 +2347,7 @@ public class JurjenLangParser extends Parser {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(242);
+					setState(243);
 					_errHandler.sync(this);
 					switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
 					case 1:
@@ -2326,11 +2355,11 @@ public class JurjenLangParser extends Parser {
 						_localctx = new Bool_e_andContext(new Bool_eContext(_parentctx, _parentState));
 						((Bool_e_andContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_bool_e);
-						setState(232);
-						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(233);
-						match(AND_KW);
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
 						setState(234);
+						match(AND_KW);
+						setState(235);
 						((Bool_e_andContext)_localctx).right = bool_e(8);
 						}
 						break;
@@ -2339,11 +2368,11 @@ public class JurjenLangParser extends Parser {
 						_localctx = new Bool_e_orContext(new Bool_eContext(_parentctx, _parentState));
 						((Bool_e_orContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_bool_e);
-						setState(235);
-						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(236);
-						match(OR_KW);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
 						setState(237);
+						match(OR_KW);
+						setState(238);
 						((Bool_e_orContext)_localctx).right = bool_e(7);
 						}
 						break;
@@ -2352,18 +2381,18 @@ public class JurjenLangParser extends Parser {
 						_localctx = new Bool_e_expressions_boolsContext(new Bool_eContext(_parentctx, _parentState));
 						((Bool_e_expressions_boolsContext)_localctx).left = _prevctx;
 						pushNewRecursionContext(_localctx, _startState, RULE_bool_e);
-						setState(238);
-						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(239);
-						((Bool_e_expressions_boolsContext)_localctx).oper = bool_comparison();
+						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
 						setState(240);
+						((Bool_e_expressions_boolsContext)_localctx).oper = bool_comparison();
+						setState(241);
 						((Bool_e_expressions_boolsContext)_localctx).right = bool_e(4);
 						}
 						break;
 					}
 					} 
 				}
-				setState(246);
+				setState(247);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,18,_ctx);
 			}
@@ -2430,14 +2459,14 @@ public class JurjenLangParser extends Parser {
 		Boolean_typeContext _localctx = new Boolean_typeContext(_ctx, getState());
 		enterRule(_localctx, 54, RULE_boolean_type);
 		try {
-			setState(249);
+			setState(250);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case TRUE_KW:
 				_localctx = new Boolean_trueContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(247);
+				setState(248);
 				match(TRUE_KW);
 				}
 				break;
@@ -2445,7 +2474,7 @@ public class JurjenLangParser extends Parser {
 				_localctx = new Boolean_falseContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(248);
+				setState(249);
 				match(FALSE_KW);
 				}
 				break;
@@ -2497,7 +2526,7 @@ public class JurjenLangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(251);
+			setState(252);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQUALS) | (1L << ISNOT) | (1L << LESSEQUALS) | (1L << MOREEQUALS) | (1L << LESSTHAN) | (1L << MORETHAN))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -2549,7 +2578,7 @@ public class JurjenLangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(253);
+			setState(254);
 			_la = _input.LA(1);
 			if ( !(_la==EQUALS || _la==ISNOT) ) {
 			_errHandler.recoverInline(this);
@@ -2599,7 +2628,7 @@ public class JurjenLangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(255);
+			setState(256);
 			match(IDENTIFIER);
 			}
 		}
@@ -2741,30 +2770,30 @@ public class JurjenLangParser extends Parser {
 		enterRule(_localctx, 62, RULE_float_type);
 		int _la;
 		try {
-			setState(286);
+			setState(287);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,25,_ctx) ) {
 			case 1:
 				_localctx = new Float_by_dot_and_identContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(258);
+				setState(259);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==SYMB_MINUS) {
 					{
-					setState(257);
+					setState(258);
 					match(SYMB_MINUS);
 					}
 				}
 
-				setState(260);
-				((Float_by_dot_and_identContext)_localctx).pre_nrs = match(NUMBERS);
 				setState(261);
-				match(SYMB_DOT);
+				((Float_by_dot_and_identContext)_localctx).pre_nrs = match(NUMBERS);
 				setState(262);
-				((Float_by_dot_and_identContext)_localctx).post_nrs = match(NUMBERS);
+				match(SYMB_DOT);
 				setState(263);
+				((Float_by_dot_and_identContext)_localctx).post_nrs = match(NUMBERS);
+				setState(264);
 				match(FLOAT_IDENT);
 				}
 				break;
@@ -2772,21 +2801,21 @@ public class JurjenLangParser extends Parser {
 				_localctx = new Float_by_dotContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(265);
+				setState(266);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==SYMB_MINUS) {
 					{
-					setState(264);
+					setState(265);
 					match(SYMB_MINUS);
 					}
 				}
 
-				setState(267);
-				((Float_by_dotContext)_localctx).pre_nrs = match(NUMBERS);
 				setState(268);
-				match(SYMB_DOT);
+				((Float_by_dotContext)_localctx).pre_nrs = match(NUMBERS);
 				setState(269);
+				match(SYMB_DOT);
+				setState(270);
 				((Float_by_dotContext)_localctx).post_nrs = match(NUMBERS);
 				}
 				break;
@@ -2794,19 +2823,19 @@ public class JurjenLangParser extends Parser {
 				_localctx = new Float_by_identContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(271);
+				setState(272);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==SYMB_MINUS) {
 					{
-					setState(270);
+					setState(271);
 					match(SYMB_MINUS);
 					}
 				}
 
-				setState(273);
-				((Float_by_identContext)_localctx).pre_nrs = match(NUMBERS);
 				setState(274);
+				((Float_by_identContext)_localctx).pre_nrs = match(NUMBERS);
+				setState(275);
 				match(FLOAT_IDENT);
 				}
 				break;
@@ -2814,19 +2843,19 @@ public class JurjenLangParser extends Parser {
 				_localctx = new Float_no_prior_by_dotContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(276);
+				setState(277);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==SYMB_MINUS) {
 					{
-					setState(275);
+					setState(276);
 					match(SYMB_MINUS);
 					}
 				}
 
-				setState(278);
-				match(SYMB_DOT);
 				setState(279);
+				match(SYMB_DOT);
+				setState(280);
 				((Float_no_prior_by_dotContext)_localctx).post_nrs = match(NUMBERS);
 				}
 				break;
@@ -2834,21 +2863,21 @@ public class JurjenLangParser extends Parser {
 				_localctx = new Float_no_prior_by_dot_and_identContext(_localctx);
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(281);
+				setState(282);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==SYMB_MINUS) {
 					{
-					setState(280);
+					setState(281);
 					match(SYMB_MINUS);
 					}
 				}
 
-				setState(283);
-				match(SYMB_DOT);
 				setState(284);
-				((Float_no_prior_by_dot_and_identContext)_localctx).post_nrs = match(NUMBERS);
+				match(SYMB_DOT);
 				setState(285);
+				((Float_no_prior_by_dot_and_identContext)_localctx).post_nrs = match(NUMBERS);
+				setState(286);
 				match(FLOAT_IDENT);
 				}
 				break;
@@ -2894,17 +2923,17 @@ public class JurjenLangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(289);
+			setState(290);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==SYMB_MINUS) {
 				{
-				setState(288);
+				setState(289);
 				match(SYMB_MINUS);
 				}
 			}
 
-			setState(291);
+			setState(292);
 			match(NUMBERS);
 			}
 		}
@@ -2946,7 +2975,7 @@ public class JurjenLangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(293);
+			setState(294);
 			match(STR_CONTENT);
 			}
 		}
@@ -2994,27 +3023,27 @@ public class JurjenLangParser extends Parser {
 		Any_valueContext _localctx = new Any_valueContext(_ctx, getState());
 		enterRule(_localctx, 68, RULE_any_value);
 		try {
-			setState(298);
+			setState(299);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(295);
+				setState(296);
 				float_type();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(296);
+				setState(297);
 				integer();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(297);
+				setState(298);
 				string();
 				}
 				break;
@@ -3043,17 +3072,17 @@ public class JurjenLangParser extends Parser {
 	private boolean e_sempred(EContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 8);
-		case 1:
-			return precpred(_ctx, 7);
-		case 2:
-			return precpred(_ctx, 6);
-		case 3:
-			return precpred(_ctx, 5);
-		case 4:
-			return precpred(_ctx, 4);
-		case 5:
 			return precpred(_ctx, 9);
+		case 1:
+			return precpred(_ctx, 8);
+		case 2:
+			return precpred(_ctx, 7);
+		case 3:
+			return precpred(_ctx, 6);
+		case 4:
+			return precpred(_ctx, 5);
+		case 5:
+			return precpred(_ctx, 10);
 		}
 		return true;
 	}
@@ -3070,7 +3099,7 @@ public class JurjenLangParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3*\u012f\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3*\u0130\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -3084,23 +3113,23 @@ public class JurjenLangParser extends Parser {
 		"\3\23\3\23\3\24\7\24\u00a1\n\24\f\24\16\24\u00a4\13\24\3\25\3\25\3\25"+
 		"\3\25\3\26\5\26\u00ab\n\26\3\27\3\27\3\27\3\30\3\30\3\30\3\31\3\31\3\31"+
 		"\3\31\3\32\3\32\5\32\u00b9\n\32\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33"+
-		"\3\33\5\33\u00c4\n\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33"+
-		"\3\33\3\33\3\33\3\33\3\33\3\33\3\33\7\33\u00d7\n\33\f\33\16\33\u00da\13"+
-		"\33\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\5"+
-		"\34\u00e9\n\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\7\34"+
-		"\u00f5\n\34\f\34\16\34\u00f8\13\34\3\35\3\35\5\35\u00fc\n\35\3\36\3\36"+
-		"\3\37\3\37\3 \3 \3!\5!\u0105\n!\3!\3!\3!\3!\3!\5!\u010c\n!\3!\3!\3!\3"+
-		"!\5!\u0112\n!\3!\3!\3!\5!\u0117\n!\3!\3!\3!\5!\u011c\n!\3!\3!\3!\5!\u0121"+
-		"\n!\3\"\5\"\u0124\n\"\3\"\3\"\3#\3#\3$\3$\3$\5$\u012d\n$\3$\2\4\64\66"+
+		"\3\33\3\33\5\33\u00c5\n\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33"+
+		"\3\33\3\33\3\33\3\33\3\33\3\33\3\33\3\33\7\33\u00d8\n\33\f\33\16\33\u00db"+
+		"\13\33\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34"+
+		"\5\34\u00ea\n\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\3\34\7\34"+
+		"\u00f6\n\34\f\34\16\34\u00f9\13\34\3\35\3\35\5\35\u00fd\n\35\3\36\3\36"+
+		"\3\37\3\37\3 \3 \3!\5!\u0106\n!\3!\3!\3!\3!\3!\5!\u010d\n!\3!\3!\3!\3"+
+		"!\5!\u0113\n!\3!\3!\3!\5!\u0118\n!\3!\3!\3!\5!\u011d\n!\3!\3!\3!\5!\u0122"+
+		"\n!\3\"\5\"\u0125\n\"\3\"\3\"\3#\3#\3$\3$\3$\5$\u012e\n$\3$\2\4\64\66"+
 		"%\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDF"+
-		"\2\4\3\2\22\27\3\2\22\23\2\u013a\2H\3\2\2\2\4O\3\2\2\2\6R\3\2\2\2\bU\3"+
+		"\2\4\3\2\22\27\3\2\22\23\2\u013c\2H\3\2\2\2\4O\3\2\2\2\6R\3\2\2\2\bU\3"+
 		"\2\2\2\nY\3\2\2\2\f]\3\2\2\2\16e\3\2\2\2\20s\3\2\2\2\22u\3\2\2\2\24|\3"+
 		"\2\2\2\26\u0086\3\2\2\2\30\u008a\3\2\2\2\32\u008c\3\2\2\2\34\u008e\3\2"+
 		"\2\2\36\u0091\3\2\2\2 \u0093\3\2\2\2\"\u0097\3\2\2\2$\u009b\3\2\2\2&\u00a2"+
 		"\3\2\2\2(\u00a5\3\2\2\2*\u00aa\3\2\2\2,\u00ac\3\2\2\2.\u00af\3\2\2\2\60"+
-		"\u00b2\3\2\2\2\62\u00b8\3\2\2\2\64\u00c3\3\2\2\2\66\u00e8\3\2\2\28\u00fb"+
-		"\3\2\2\2:\u00fd\3\2\2\2<\u00ff\3\2\2\2>\u0101\3\2\2\2@\u0120\3\2\2\2B"+
-		"\u0123\3\2\2\2D\u0127\3\2\2\2F\u012c\3\2\2\2HI\5\4\3\2IJ\7\2\2\3J\3\3"+
+		"\u00b2\3\2\2\2\62\u00b8\3\2\2\2\64\u00c4\3\2\2\2\66\u00e9\3\2\2\28\u00fc"+
+		"\3\2\2\2:\u00fe\3\2\2\2<\u0100\3\2\2\2>\u0102\3\2\2\2@\u0121\3\2\2\2B"+
+		"\u0124\3\2\2\2D\u0128\3\2\2\2F\u012d\3\2\2\2HI\5\4\3\2IJ\7\2\2\3J\3\3"+
 		"\2\2\2KN\5\6\4\2LN\5\26\f\2MK\3\2\2\2ML\3\2\2\2NQ\3\2\2\2OM\3\2\2\2OP"+
 		"\3\2\2\2P\5\3\2\2\2QO\3\2\2\2RS\5\b\5\2ST\5\22\n\2T\7\3\2\2\2UV\7\4\2"+
 		"\2VW\7(\2\2WX\5\16\b\2X\t\3\2\2\2Y[\7\5\2\2Z\\\5\36\20\2[Z\3\2\2\2[\\"+
@@ -3111,8 +3140,8 @@ public class JurjenLangParser extends Parser {
 		"i\3\2\2\2sk\3\2\2\2t\21\3\2\2\2uv\7&\2\2vw\5\24\13\2wx\7\'\2\2x\23\3\2"+
 		"\2\2y{\5\26\f\2zy\3\2\2\2{~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\25\3\2\2\2~|"+
 		"\3\2\2\2\177\u0087\5\60\31\2\u0080\u0087\5\30\r\2\u0081\u0087\5\"\22\2"+
-		"\u0082\u0087\5.\30\2\u0083\u0087\5 \21\2\u0084\u0087\5\f\7\2\u0085\u0087"+
-		"\5\n\6\2\u0086\177\3\2\2\2\u0086\u0080\3\2\2\2\u0086\u0081\3\2\2\2\u0086"+
+		"\u0082\u0087\5.\30\2\u0083\u0087\5 \21\2\u0084\u0087\5\n\6\2\u0085\u0087"+
+		"\5\f\7\2\u0086\177\3\2\2\2\u0086\u0080\3\2\2\2\u0086\u0081\3\2\2\2\u0086"+
 		"\u0082\3\2\2\2\u0086\u0083\3\2\2\2\u0086\u0084\3\2\2\2\u0086\u0085\3\2"+
 		"\2\2\u0087\27\3\2\2\2\u0088\u008b\5\34\17\2\u0089\u008b\5\32\16\2\u008a"+
 		"\u0088\3\2\2\2\u008a\u0089\3\2\2\2\u008b\31\3\2\2\2\u008c\u008d\7\6\2"+
@@ -3130,48 +3159,49 @@ public class JurjenLangParser extends Parser {
 		"\u00b4\7#\2\2\u00b4\u00b5\5\62\32\2\u00b5\61\3\2\2\2\u00b6\u00b9\5\64"+
 		"\33\2\u00b7\u00b9\5\66\34\2\u00b8\u00b6\3\2\2\2\u00b8\u00b7\3\2\2\2\u00b9"+
 		"\63\3\2\2\2\u00ba\u00bb\b\33\1\2\u00bb\u00bc\7$\2\2\u00bc\u00bd\5\64\33"+
-		"\2\u00bd\u00be\7%\2\2\u00be\u00c4\3\2\2\2\u00bf\u00c0\7\35\2\2\u00c0\u00c4"+
-		"\5\64\33\5\u00c1\u00c4\5> \2\u00c2\u00c4\5F$\2\u00c3\u00ba\3\2\2\2\u00c3"+
-		"\u00bf\3\2\2\2\u00c3\u00c1\3\2\2\2\u00c3\u00c2\3\2\2\2\u00c4\u00d8\3\2"+
-		"\2\2\u00c5\u00c6\f\n\2\2\u00c6\u00c7\7\31\2\2\u00c7\u00d7\5\64\33\13\u00c8"+
-		"\u00c9\f\t\2\2\u00c9\u00ca\7\32\2\2\u00ca\u00d7\5\64\33\n\u00cb\u00cc"+
-		"\f\b\2\2\u00cc\u00cd\7\33\2\2\u00cd\u00d7\5\64\33\t\u00ce\u00cf\f\7\2"+
-		"\2\u00cf\u00d0\7\34\2\2\u00d0\u00d7\5\64\33\b\u00d1\u00d2\f\6\2\2\u00d2"+
-		"\u00d3\7\35\2\2\u00d3\u00d7\5\64\33\7\u00d4\u00d5\f\13\2\2\u00d5\u00d7"+
-		"\7\30\2\2\u00d6\u00c5\3\2\2\2\u00d6\u00c8\3\2\2\2\u00d6\u00cb\3\2\2\2"+
-		"\u00d6\u00ce\3\2\2\2\u00d6\u00d1\3\2\2\2\u00d6\u00d4\3\2\2\2\u00d7\u00da"+
-		"\3\2\2\2\u00d8\u00d6\3\2\2\2\u00d8\u00d9\3\2\2\2\u00d9\65\3\2\2\2\u00da"+
-		"\u00d8\3\2\2\2\u00db\u00dc\b\34\1\2\u00dc\u00dd\7$\2\2\u00dd\u00de\5\66"+
-		"\34\2\u00de\u00df\7%\2\2\u00df\u00e9\3\2\2\2\u00e0\u00e1\7\21\2\2\u00e1"+
-		"\u00e9\5\66\34\7\u00e2\u00e3\5\64\33\2\u00e3\u00e4\5:\36\2\u00e4\u00e5"+
-		"\5\64\33\2\u00e5\u00e9\3\2\2\2\u00e6\u00e9\58\35\2\u00e7\u00e9\5> \2\u00e8"+
-		"\u00db\3\2\2\2\u00e8\u00e0\3\2\2\2\u00e8\u00e2\3\2\2\2\u00e8\u00e6\3\2"+
-		"\2\2\u00e8\u00e7\3\2\2\2\u00e9\u00f6\3\2\2\2\u00ea\u00eb\f\t\2\2\u00eb"+
-		"\u00ec\7\17\2\2\u00ec\u00f5\5\66\34\n\u00ed\u00ee\f\b\2\2\u00ee\u00ef"+
-		"\7\20\2\2\u00ef\u00f5\5\66\34\t\u00f0\u00f1\f\5\2\2\u00f1\u00f2\5<\37"+
-		"\2\u00f2\u00f3\5\66\34\6\u00f3\u00f5\3\2\2\2\u00f4\u00ea\3\2\2\2\u00f4"+
-		"\u00ed\3\2\2\2\u00f4\u00f0\3\2\2\2\u00f5\u00f8\3\2\2\2\u00f6\u00f4\3\2"+
-		"\2\2\u00f6\u00f7\3\2\2\2\u00f7\67\3\2\2\2\u00f8\u00f6\3\2\2\2\u00f9\u00fc"+
-		"\7\r\2\2\u00fa\u00fc\7\16\2\2\u00fb\u00f9\3\2\2\2\u00fb\u00fa\3\2\2\2"+
-		"\u00fc9\3\2\2\2\u00fd\u00fe\t\2\2\2\u00fe;\3\2\2\2\u00ff\u0100\t\3\2\2"+
-		"\u0100=\3\2\2\2\u0101\u0102\7(\2\2\u0102?\3\2\2\2\u0103\u0105\7\35\2\2"+
-		"\u0104\u0103\3\2\2\2\u0104\u0105\3\2\2\2\u0105\u0106\3\2\2\2\u0106\u0107"+
-		"\7\3\2\2\u0107\u0108\7 \2\2\u0108\u0109\7\3\2\2\u0109\u0121\7\"\2\2\u010a"+
-		"\u010c\7\35\2\2\u010b\u010a\3\2\2\2\u010b\u010c\3\2\2\2\u010c\u010d\3"+
-		"\2\2\2\u010d\u010e\7\3\2\2\u010e\u010f\7 \2\2\u010f\u0121\7\3\2\2\u0110"+
-		"\u0112\7\35\2\2\u0111\u0110\3\2\2\2\u0111\u0112\3\2\2\2\u0112\u0113\3"+
-		"\2\2\2\u0113\u0114\7\3\2\2\u0114\u0121\7\"\2\2\u0115\u0117\7\35\2\2\u0116"+
-		"\u0115\3\2\2\2\u0116\u0117\3\2\2\2\u0117\u0118\3\2\2\2\u0118\u0119\7 "+
-		"\2\2\u0119\u0121\7\3\2\2\u011a\u011c\7\35\2\2\u011b\u011a\3\2\2\2\u011b"+
-		"\u011c\3\2\2\2\u011c\u011d\3\2\2\2\u011d\u011e\7 \2\2\u011e\u011f\7\3"+
-		"\2\2\u011f\u0121\7\"\2\2\u0120\u0104\3\2\2\2\u0120\u010b\3\2\2\2\u0120"+
-		"\u0111\3\2\2\2\u0120\u0116\3\2\2\2\u0120\u011b\3\2\2\2\u0121A\3\2\2\2"+
-		"\u0122\u0124\7\35\2\2\u0123\u0122\3\2\2\2\u0123\u0124\3\2\2\2\u0124\u0125"+
-		"\3\2\2\2\u0125\u0126\7\3\2\2\u0126C\3\2\2\2\u0127\u0128\7)\2\2\u0128E"+
-		"\3\2\2\2\u0129\u012d\5@!\2\u012a\u012d\5B\"\2\u012b\u012d\5D#\2\u012c"+
-		"\u0129\3\2\2\2\u012c\u012a\3\2\2\2\u012c\u012b\3\2\2\2\u012dG\3\2\2\2"+
-		"\36MO[eips|\u0086\u008a\u00a2\u00aa\u00b8\u00c3\u00d6\u00d8\u00e8\u00f4"+
-		"\u00f6\u00fb\u0104\u010b\u0111\u0116\u011b\u0120\u0123\u012c";
+		"\2\u00bd\u00be\7%\2\2\u00be\u00c5\3\2\2\2\u00bf\u00c0\7\35\2\2\u00c0\u00c5"+
+		"\5\64\33\6\u00c1\u00c5\5> \2\u00c2\u00c5\5\f\7\2\u00c3\u00c5\5F$\2\u00c4"+
+		"\u00ba\3\2\2\2\u00c4\u00bf\3\2\2\2\u00c4\u00c1\3\2\2\2\u00c4\u00c2\3\2"+
+		"\2\2\u00c4\u00c3\3\2\2\2\u00c5\u00d9\3\2\2\2\u00c6\u00c7\f\13\2\2\u00c7"+
+		"\u00c8\7\31\2\2\u00c8\u00d8\5\64\33\f\u00c9\u00ca\f\n\2\2\u00ca\u00cb"+
+		"\7\32\2\2\u00cb\u00d8\5\64\33\13\u00cc\u00cd\f\t\2\2\u00cd\u00ce\7\33"+
+		"\2\2\u00ce\u00d8\5\64\33\n\u00cf\u00d0\f\b\2\2\u00d0\u00d1\7\34\2\2\u00d1"+
+		"\u00d8\5\64\33\t\u00d2\u00d3\f\7\2\2\u00d3\u00d4\7\35\2\2\u00d4\u00d8"+
+		"\5\64\33\b\u00d5\u00d6\f\f\2\2\u00d6\u00d8\7\30\2\2\u00d7\u00c6\3\2\2"+
+		"\2\u00d7\u00c9\3\2\2\2\u00d7\u00cc\3\2\2\2\u00d7\u00cf\3\2\2\2\u00d7\u00d2"+
+		"\3\2\2\2\u00d7\u00d5\3\2\2\2\u00d8\u00db\3\2\2\2\u00d9\u00d7\3\2\2\2\u00d9"+
+		"\u00da\3\2\2\2\u00da\65\3\2\2\2\u00db\u00d9\3\2\2\2\u00dc\u00dd\b\34\1"+
+		"\2\u00dd\u00de\7$\2\2\u00de\u00df\5\66\34\2\u00df\u00e0\7%\2\2\u00e0\u00ea"+
+		"\3\2\2\2\u00e1\u00e2\7\21\2\2\u00e2\u00ea\5\66\34\7\u00e3\u00e4\5\64\33"+
+		"\2\u00e4\u00e5\5:\36\2\u00e5\u00e6\5\64\33\2\u00e6\u00ea\3\2\2\2\u00e7"+
+		"\u00ea\58\35\2\u00e8\u00ea\5> \2\u00e9\u00dc\3\2\2\2\u00e9\u00e1\3\2\2"+
+		"\2\u00e9\u00e3\3\2\2\2\u00e9\u00e7\3\2\2\2\u00e9\u00e8\3\2\2\2\u00ea\u00f7"+
+		"\3\2\2\2\u00eb\u00ec\f\t\2\2\u00ec\u00ed\7\17\2\2\u00ed\u00f6\5\66\34"+
+		"\n\u00ee\u00ef\f\b\2\2\u00ef\u00f0\7\20\2\2\u00f0\u00f6\5\66\34\t\u00f1"+
+		"\u00f2\f\5\2\2\u00f2\u00f3\5<\37\2\u00f3\u00f4\5\66\34\6\u00f4\u00f6\3"+
+		"\2\2\2\u00f5\u00eb\3\2\2\2\u00f5\u00ee\3\2\2\2\u00f5\u00f1\3\2\2\2\u00f6"+
+		"\u00f9\3\2\2\2\u00f7\u00f5\3\2\2\2\u00f7\u00f8\3\2\2\2\u00f8\67\3\2\2"+
+		"\2\u00f9\u00f7\3\2\2\2\u00fa\u00fd\7\r\2\2\u00fb\u00fd\7\16\2\2\u00fc"+
+		"\u00fa\3\2\2\2\u00fc\u00fb\3\2\2\2\u00fd9\3\2\2\2\u00fe\u00ff\t\2\2\2"+
+		"\u00ff;\3\2\2\2\u0100\u0101\t\3\2\2\u0101=\3\2\2\2\u0102\u0103\7(\2\2"+
+		"\u0103?\3\2\2\2\u0104\u0106\7\35\2\2\u0105\u0104\3\2\2\2\u0105\u0106\3"+
+		"\2\2\2\u0106\u0107\3\2\2\2\u0107\u0108\7\3\2\2\u0108\u0109\7 \2\2\u0109"+
+		"\u010a\7\3\2\2\u010a\u0122\7\"\2\2\u010b\u010d\7\35\2\2\u010c\u010b\3"+
+		"\2\2\2\u010c\u010d\3\2\2\2\u010d\u010e\3\2\2\2\u010e\u010f\7\3\2\2\u010f"+
+		"\u0110\7 \2\2\u0110\u0122\7\3\2\2\u0111\u0113\7\35\2\2\u0112\u0111\3\2"+
+		"\2\2\u0112\u0113\3\2\2\2\u0113\u0114\3\2\2\2\u0114\u0115\7\3\2\2\u0115"+
+		"\u0122\7\"\2\2\u0116\u0118\7\35\2\2\u0117\u0116\3\2\2\2\u0117\u0118\3"+
+		"\2\2\2\u0118\u0119\3\2\2\2\u0119\u011a\7 \2\2\u011a\u0122\7\3\2\2\u011b"+
+		"\u011d\7\35\2\2\u011c\u011b\3\2\2\2\u011c\u011d\3\2\2\2\u011d\u011e\3"+
+		"\2\2\2\u011e\u011f\7 \2\2\u011f\u0120\7\3\2\2\u0120\u0122\7\"\2\2\u0121"+
+		"\u0105\3\2\2\2\u0121\u010c\3\2\2\2\u0121\u0112\3\2\2\2\u0121\u0117\3\2"+
+		"\2\2\u0121\u011c\3\2\2\2\u0122A\3\2\2\2\u0123\u0125\7\35\2\2\u0124\u0123"+
+		"\3\2\2\2\u0124\u0125\3\2\2\2\u0125\u0126\3\2\2\2\u0126\u0127\7\3\2\2\u0127"+
+		"C\3\2\2\2\u0128\u0129\7)\2\2\u0129E\3\2\2\2\u012a\u012e\5@!\2\u012b\u012e"+
+		"\5B\"\2\u012c\u012e\5D#\2\u012d\u012a\3\2\2\2\u012d\u012b\3\2\2\2\u012d"+
+		"\u012c\3\2\2\2\u012eG\3\2\2\2\36MO[eips|\u0086\u008a\u00a2\u00aa\u00b8"+
+		"\u00c4\u00d7\u00d9\u00e9\u00f5\u00f7\u00fc\u0105\u010c\u0112\u0117\u011c"+
+		"\u0121\u0124\u012d";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

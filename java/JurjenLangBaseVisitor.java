@@ -268,6 +268,13 @@ public class JurjenLangBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitE_func(JurjenLangParser.E_funcContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitE_division(JurjenLangParser.E_divisionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

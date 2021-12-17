@@ -239,6 +239,13 @@ public interface JurjenLangVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitE_negation(JurjenLangParser.E_negationContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code e_func}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitE_func(JurjenLangParser.E_funcContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code e_division}
 	 * labeled alternative in {@link JurjenLangParser#e}.
 	 * @param ctx the parse tree

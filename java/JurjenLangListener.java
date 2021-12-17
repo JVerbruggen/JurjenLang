@@ -393,6 +393,18 @@ public interface JurjenLangListener extends ParseTreeListener {
 	 */
 	void exitE_negation(JurjenLangParser.E_negationContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code e_func}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterE_func(JurjenLangParser.E_funcContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code e_func}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitE_func(JurjenLangParser.E_funcContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code e_division}
 	 * labeled alternative in {@link JurjenLangParser#e}.
 	 * @param ctx the parse tree

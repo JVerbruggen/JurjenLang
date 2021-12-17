@@ -447,6 +447,18 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterE_func(JurjenLangParser.E_funcContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitE_func(JurjenLangParser.E_funcContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterE_division(JurjenLangParser.E_divisionContext ctx) { }
 	/**
 	 * {@inheritDoc}
