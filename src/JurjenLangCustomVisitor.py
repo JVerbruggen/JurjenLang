@@ -130,19 +130,22 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
     def visitBool_e_and(self, ctx:JurjenLangParser.Bool_e_andContext):
         left = self.visit(ctx.left)
         right = self.visit(ctx.right)
+        res = left and right
 
-        return left and right
+        return res
 
     def visitBool_e_or(self, ctx:JurjenLangParser.Bool_e_orContext):
         left = self.visit(ctx.left)
         right = self.visit(ctx.right)
+        res = left or right
 
-        return left or right
+        return res
 
     def visitBool_e_not(self, ctx:JurjenLangParser.Bool_e_notContext):
         bool_expr = self.visit(ctx.bool_expr)
+        res = JLBoolean(not bool_expr)  # Only necessary for not operator since I cant parse this into a JBoolean automatically
 
-        return not bool_expr
+        return res
     
     def visitBool_e_variable(self, ctx:JurjenLangParser.Bool_e_variableContext):
         name = self.visit(ctx.name)
@@ -211,7 +214,7 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
 
     # Scope
     def _visit_scope_children(self, scopectx):
-        returner = EmptyReturner()
+        returner = None
 
         child_count = scopectx.getChildCount()
         for i in range(child_count):
@@ -256,14 +259,17 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
             self.floating_scope_variables = None
         
         # Set unpacking returner mode
+        returner = None
         this_scope_accepts_returner = False
         if self.scope_accepts_returner:
             self.debug.r(f"SCOPE: Will unpack returner in context: '{str(ctx)}'")
             this_scope_accepts_returner = True
             self.scope_accepts_returner = False
+            returner = EmptyReturner()
 
         # Call contents of scope
-        returner = self._visit_scope_children(ctx)
+        child_returner = self._visit_scope_children(ctx)
+        returner = (child_returner if child_returner is not None else returner)
         self.scope_stack.pop()
 
         # Unpack if return if in unpacking mode

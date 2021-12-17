@@ -10,6 +10,9 @@ class JLBoolean(IValue):
     def __eq__(self, other):
         return JLBoolean(self.value == other.value)
 
+    def __ne__(self, other):
+        return JLBoolean(self.value != other.value)
+
     def __bool__(self):
         return self.value
     
