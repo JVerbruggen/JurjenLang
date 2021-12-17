@@ -11,6 +11,7 @@ from src.scope.Returner import *
 from src.variable.Function import *
 from src.variable.FunctionReference import *
 from src.scope.Debugger import *
+from src.error.ErrorHandler import *
 from src.expression.NumericalExpression import *
 from src.expression.BooleanExpression import *
 from src.antlr_parsing.ChildParser import *
@@ -19,6 +20,7 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
     def __init__(self):
         self.scope_stack = ScopeStack()
         self.debug = Debugger(r_enabled=False, p_enabled=False)
+        self.error_handler = ErrorHandler()
 
     # Types
     def visitInteger(self, ctx:JurjenLangParser.IntegerContext):
@@ -169,7 +171,7 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         elif op == ">":     return MoreThanExpressionNumerical()
         elif op == ">=":    return MoreEqualsExpressionNumerical()
         
-        raise NotImplementedError("Unknown numerical comparison")
+        self.error_handler.error(ctx, "Unknown numerical comparison")
 
     def visitBool_e_expressions_bools(self, ctx:JurjenLangParser.Bool_e_expressions_boolsContext):
         left = self.visit(ctx.left)
@@ -186,7 +188,7 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         elif op == "!=":
             return NotEqualsExpressionBoolean()
 
-        raise NotImplementedError("Unknown boolean comparison")
+        self.error_handler.error(ctx, "Unknown boolean comparison")
 
     def visitBool_parentheses(self, ctx:JurjenLangParser.Bool_parenthesesContext):
         return self.visit(ctx.bool_expr)
@@ -289,10 +291,15 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         returned = self.visit(ctx.ifchain_if)
         if returned is not None: 
             self.debug.r(f"IFCHAIN: Returning {returned}")
+            if returned.unpack_directly:
+                return returned.get_value()
             return returned
 
         returned = self.visit(ctx.ifchain_elifs)
-        if returned is not None: return returned
+        if returned is not None: 
+            if returned.unpack_directly:
+                return returned.get_value()
+            return returned
         
         returned = self.visit(ctx.ifchain_else)
         return returned
@@ -304,6 +311,7 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         for child in children:
             ret = self.visit(child)
             if ret is not None:
+                self.debug.r(f"ELIF: Returning {ret}")
                 returned = ret
                 break
         return returned
@@ -313,8 +321,10 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
 
         if bool(bool_expr):
             res = self.visit(ctx.scope())
-            # self.debug.r(f"IFSTAT: Returning {res}")
-            return res
+            self.debug.r(f"IFSTAT: Valid clause, returning {res}")
+            if Returner.is_returner(res):
+                return res
+            return Returner(res, unpack_directly=True)
         
         return None
 
@@ -322,8 +332,11 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         bool_expr = self.visit(ctx.expr)
 
         if bool_expr:
-            self.visit(ctx.scope())
-            return self.visit(ctx.scope())
+            res = self.visit(ctx.scope())
+            self.debug.r(f"ELIFSTAT: Valid clause, returning {res}")
+            if Returner.is_returner(res):
+                return res
+            return Returner(res, unpack_directly=True)
         
         return None
 
@@ -345,7 +358,7 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         bool_expr = self.visit(ctx.expr)
 
         if not bool_expr:
-            raise ValueError("Assertion Error!")
+            self.error_handler.error(ctx, f"Assertion Error")
         
         return True
 
@@ -372,13 +385,13 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         latest_scope = self.scope_stack.latest()
         function = latest_scope.get_variable(func_name)
         if function is None or type(function) is not Function:
-            raise ValueError(f"The function '{func_name}' does not exist")
+            self.error_handler.error(ctx, f"The function '{func_name}' does not exist")
 
         required_params = function.get_parameter_names()
         required_params_length = len(required_params)
         given_params_length = len(params) if params is not None else 0
         if required_params_length != given_params_length:
-            raise ValueError(f"The function requires exactly {required_params_length} parameter" + ("s" if required_params_length != 1 else "") + f", while {given_params_length} " + ("were" if given_params_length != 1 else "was") +  " given")
+            self.error_handler.error(ctx, f"The function requires exactly {required_params_length} parameter" + ("s" if required_params_length != 1 else "") + f", while {given_params_length} " + ("were" if given_params_length != 1 else "was") +  " given")
         
         variables = list()
         for i in range(given_params_length):

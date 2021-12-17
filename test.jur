@@ -66,4 +66,80 @@ if true{
     assert true
 }
 
+if false{
+    assert false
+}else{
+    assert true
+}
+
+changed = 0
+if false{
+    changed = 1
+    assert false
+}elif false{
+    changed = 1
+    assert false
+}elif true{
+    changed = 1
+    assert true
+}else{
+    changed = 1
+    assert false
+}
+assert changed == 1
+
+changed = 0
+if false{
+    changed = 1
+    assert false
+}elif false{
+    changed = 1
+    assert false
+}elif true{
+    changed = 1
+    assert true
+}elif false{
+    changed = 1
+    assert false
+}else{
+    changed = 1
+    assert false
+}
+assert changed == 1
+
+changed = 0
+if true{
+    if true{
+        changed = 1
+        assert true
+    }else{
+        changed = 1
+        assert false
+    }
+}else{
+    changed = 1
+    assert false
+}
+assert changed == 1
+
+changed = 0
+if true{
+    if true{
+        if true{
+            changed = 1
+            assert true
+        }else{
+            changed = 1
+            assert false
+        }
+    }else{
+        changed = 1
+        assert false
+    }
+}else{
+    changed = 1
+    assert false
+}
+assert changed == 1
+
 print "success"

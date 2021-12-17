@@ -1,6 +1,7 @@
 class Returner:
-    def __init__(self, value):
+    def __init__(self, value, unpack_directly=False):
         self.value = value
+        self.unpack_directly = unpack_directly
 
     def get_value(self):
         return self.value
@@ -9,7 +10,7 @@ class Returner:
         return False
 
     def is_returner(returner):
-        return issubclass(type(returner), Returner)
+        return returner is not None and issubclass(type(returner), Returner)
 
     def __str__(self):
         return f"{type(self)} {self.get_value()}"
