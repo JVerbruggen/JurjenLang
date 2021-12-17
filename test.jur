@@ -146,19 +146,49 @@ func rettester{
     if true{
         if true{
             if false{
+                changed = 1
                 return false
             }else{
+                changed = 1
                 return true
             }
         }else{
+            changed = 1
             return false
         }
     }else{
+        changed = 1
         return false
     }
 }
 
+changed = 0
 val = rettester()
 assert val
+assert changed == 1
+
+func nothingafterreturn{
+    assert true
+    return true
+    assert false
+}
+
+nothingafterreturn()
+
+
+func add a b{
+    return a + b
+}
+
+func mul a b{
+    return a * b
+}
+
+func someoper a b oper{
+    return oper(a, b)
+}
+
+assert someoper(3, 3, add) == 6
+assert someoper(3, 3, mul) == 9
 
 print "success"
