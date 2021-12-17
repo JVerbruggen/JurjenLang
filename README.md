@@ -1,5 +1,5 @@
 # JurjenLang
-### An interpreted programming language
+### An untyped interpreted functional programming language
 
 <br>
 <br>
