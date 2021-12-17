@@ -1,3 +1,15 @@
+if 2==2{
+    print "2 == 2 is true"
+}else{
+    print "2 == 2 is false"
+}
+
+i = 0
+while i < 5{
+    print "loooop"
+    i = i + 1
+}
+
 func printstringone {
     print "one"
 }
