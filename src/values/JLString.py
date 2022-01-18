@@ -1,5 +1,4 @@
 from src.values.IValue import *
-from src.values.JLInteger import *
 
 class JLString(IValue):
     def __init__(self, value: str):
@@ -9,7 +8,7 @@ class JLString(IValue):
         return self.value
 
     def __mul__(self, other):
-        if type(other) is not JLInteger:
+        if str(type(other)) != "<class 'src.values.JLInteger.JLInteger'>":
             raise ValueError("JLString can only be multiplied by a JLInteger")
 
         using_val = self.value
@@ -22,10 +21,14 @@ class JLString(IValue):
         return JLString(res)
 
     def __add__(self, other):
-        if type(other) is not JLString:
-            raise ValueError("JLString can only be added to another JLString")
+        if type(other) is not JLString and str(type(other)) != "<class 'src.values.JLInteger.JLInteger'>":
+            raise ValueError("JLString can only be added to another JLString or a JLInteger")
         
-        return JLString(self.value + other.value)
+        o = other.value
+        if str(type(other)) == "<class 'src.values.JLInteger.JLInteger'>":
+            o = str(o)
+
+        return JLString(self.value + o)
 
     def __repr__(self):
         return f"\"{self.value}\""

@@ -1,6 +1,7 @@
 from src.values.IValue import *
 from src.values.INumericalValue import *
 from src.values.JLBoolean import *
+from src.values.JLString import *
 from src.values.JLFloat import *
 
 class JLInteger(INumericalValue):
@@ -25,6 +26,8 @@ class JLInteger(INumericalValue):
         return JLInteger(self.value - other.get_value())
 
     def __mul__(self, other):
+        if str(type(other)) == "<class 'src.values.JLMatrix.JLMatrix'>" or type(other) == JLString:
+            return JLString("Multiplication of matrix with integer:\n" + str(self) + "\n---\n" + str(other))
         if issubclass(type(other), type(INumericalValue)):
             raise TypeError("JLInteger can only multiply with other numerical values")
         if type(other) is not JLInteger:

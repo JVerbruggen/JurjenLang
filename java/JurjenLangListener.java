@@ -131,6 +131,16 @@ public interface JurjenLangListener extends ParseTreeListener {
 	 */
 	void exitStat(JurjenLangParser.StatContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JurjenLangParser#break_stat}.
+	 * @param ctx the parse tree
+	 */
+	void enterBreak_stat(JurjenLangParser.Break_statContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JurjenLangParser#break_stat}.
+	 * @param ctx the parse tree
+	 */
+	void exitBreak_stat(JurjenLangParser.Break_statContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JurjenLangParser#debugtools}.
 	 * @param ctx the parse tree
 	 */
@@ -180,6 +190,16 @@ public interface JurjenLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWhileloop(JurjenLangParser.WhileloopContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JurjenLangParser#repeatloop}.
+	 * @param ctx the parse tree
+	 */
+	void enterRepeatloop(JurjenLangParser.RepeatloopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JurjenLangParser#repeatloop}.
+	 * @param ctx the parse tree
+	 */
+	void exitRepeatloop(JurjenLangParser.RepeatloopContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JurjenLangParser#ifchain}.
 	 * @param ctx the parse tree
@@ -251,15 +271,41 @@ public interface JurjenLangListener extends ParseTreeListener {
 	 */
 	void exitAssertion(JurjenLangParser.AssertionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JurjenLangParser#assignment}.
+	 * Enter a parse tree produced by the {@code assignment_assign_tomatrix}
+	 * labeled alternative in {@link JurjenLangParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssignment(JurjenLangParser.AssignmentContext ctx);
+	void enterAssignment_assign_tomatrix(JurjenLangParser.Assignment_assign_tomatrixContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JurjenLangParser#assignment}.
+	 * Exit a parse tree produced by the {@code assignment_assign_tomatrix}
+	 * labeled alternative in {@link JurjenLangParser#assignment}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssignment(JurjenLangParser.AssignmentContext ctx);
+	void exitAssignment_assign_tomatrix(JurjenLangParser.Assignment_assign_tomatrixContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code assignment_assign}
+	 * labeled alternative in {@link JurjenLangParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment_assign(JurjenLangParser.Assignment_assignContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code assignment_assign}
+	 * labeled alternative in {@link JurjenLangParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment_assign(JurjenLangParser.Assignment_assignContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code assignment_increment}
+	 * labeled alternative in {@link JurjenLangParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment_increment(JurjenLangParser.Assignment_incrementContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code assignment_increment}
+	 * labeled alternative in {@link JurjenLangParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment_increment(JurjenLangParser.Assignment_incrementContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code assignable_expression}
 	 * labeled alternative in {@link JurjenLangParser#assignable}.
@@ -285,6 +331,28 @@ public interface JurjenLangListener extends ParseTreeListener {
 	 */
 	void exitAssignable_bool_expression(JurjenLangParser.Assignable_bool_expressionContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code assignable_matrix}
+	 * labeled alternative in {@link JurjenLangParser#assignable}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignable_matrix(JurjenLangParser.Assignable_matrixContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code assignable_matrix}
+	 * labeled alternative in {@link JurjenLangParser#assignable}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignable_matrix(JurjenLangParser.Assignable_matrixContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JurjenLangParser#matrix_assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterMatrix_assignment(JurjenLangParser.Matrix_assignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JurjenLangParser#matrix_assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitMatrix_assignment(JurjenLangParser.Matrix_assignmentContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code e_any_value}
 	 * labeled alternative in {@link JurjenLangParser#e}.
 	 * @param ctx the parse tree
@@ -308,6 +376,66 @@ public interface JurjenLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitE_subtraction(JurjenLangParser.E_subtractionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code e_matrix_trans}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterE_matrix_trans(JurjenLangParser.E_matrix_transContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code e_matrix_trans}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitE_matrix_trans(JurjenLangParser.E_matrix_transContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code e_matrix_inv}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterE_matrix_inv(JurjenLangParser.E_matrix_invContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code e_matrix_inv}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitE_matrix_inv(JurjenLangParser.E_matrix_invContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code e_exponent}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterE_exponent(JurjenLangParser.E_exponentContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code e_exponent}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitE_exponent(JurjenLangParser.E_exponentContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code e_multiply}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterE_multiply(JurjenLangParser.E_multiplyContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code e_multiply}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitE_multiply(JurjenLangParser.E_multiplyContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code e_matrix}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void enterE_matrix(JurjenLangParser.E_matrixContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code e_matrix}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 */
+	void exitE_matrix(JurjenLangParser.E_matrixContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code e_addition}
 	 * labeled alternative in {@link JurjenLangParser#e}.
@@ -345,18 +473,6 @@ public interface JurjenLangListener extends ParseTreeListener {
 	 */
 	void exitE_factorial(JurjenLangParser.E_factorialContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code e_exponent}
-	 * labeled alternative in {@link JurjenLangParser#e}.
-	 * @param ctx the parse tree
-	 */
-	void enterE_exponent(JurjenLangParser.E_exponentContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code e_exponent}
-	 * labeled alternative in {@link JurjenLangParser#e}.
-	 * @param ctx the parse tree
-	 */
-	void exitE_exponent(JurjenLangParser.E_exponentContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code e_parentheses}
 	 * labeled alternative in {@link JurjenLangParser#e}.
 	 * @param ctx the parse tree
@@ -368,18 +484,6 @@ public interface JurjenLangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitE_parentheses(JurjenLangParser.E_parenthesesContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code e_multiply}
-	 * labeled alternative in {@link JurjenLangParser#e}.
-	 * @param ctx the parse tree
-	 */
-	void enterE_multiply(JurjenLangParser.E_multiplyContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code e_multiply}
-	 * labeled alternative in {@link JurjenLangParser#e}.
-	 * @param ctx the parse tree
-	 */
-	void exitE_multiply(JurjenLangParser.E_multiplyContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code e_negation}
 	 * labeled alternative in {@link JurjenLangParser#e}.

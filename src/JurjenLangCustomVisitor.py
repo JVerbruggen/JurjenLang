@@ -4,6 +4,7 @@ from antlr_python.JurjenLangVisitor import JurjenLangVisitor
 from src.values.JLInteger import *
 from src.values.JLFloat import *
 from src.values.JLString import *
+from src.values.JLMatrix import *
 from src.values.IValue import *
 from src.scope.ScopeStack import *
 from src.scope.Scope import *
@@ -194,7 +195,7 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
         return self.visit(ctx.bool_expr)
 
     # Assignment
-    def visitAssignment(self, ctx:JurjenLangParser.AssignmentContext):
+    def visitAssignment_assign(self, ctx:JurjenLangParser.Assignment_assignContext):
         name = self.visit(ctx.name)
         assignable = self.visit(ctx.ass)
 
@@ -225,11 +226,20 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
             res = self.visit(child)
             self.debug.r(f"SCOPECHILD: checking res={str(res)}({type(child)}) in context {str(scopectx)}")
 
+            if type(res) == Returner and type(res.value) == Breaker:
+                self.breakout_listening = True
+                return res
+
+            if type(res) == Breaker:
+                self.breakout_listening = True
+                return Returner(res)
+
             if Returner.is_returner(res):
                 self.debug.r(f"SCOPECHILD: found returner {str(res)} in context {str(scopectx)}")
                 returner = res
                 break
 
+            
         return returner
     
     def visitFunc_return(self, ctx:JurjenLangParser.Func_returnContext):
@@ -443,3 +453,83 @@ class JurjenLangCustomVisitor(JurjenLangVisitor):
             i+=2
 
         return params
+
+    # EXAM
+
+
+    breakout_listening = False
+    def visitRepeatloop(self, ctx:JurjenLangParser.RepeatloopContext):
+        self.visit(ctx.scope())
+        while not self.visit(ctx.expr):
+            self.visit(ctx.scope())
+
+            if self.breakout_listening:
+                self.breakout_listening = False
+                break
+
+    def visitBreak_stat(self, ctx:JurjenLangParser.Break_statContext):
+        return Breaker()
+
+    def visitAssignment_increment(self, ctx:JurjenLangParser.Assignment_incrementContext):
+        name = self.visit(ctx.name)
+
+        variable = self.scope_stack.latest().get_variable(name)
+        var_val = variable.get_value()
+        if variable is not None and type(var_val) is JLInteger:
+            var_val.value += 1
+        else:
+            raise ValueError("Cannot increment unknown variable")
+
+        return var_val
+
+    def visitMatrix_assignment(self, ctx:JurjenLangParser.Matrix_assignmentContext):
+        width = IntParser.parse(ctx.getChild(1))
+        height = IntParser.parse(ctx.getChild(3))
+        
+        res = JLMatrix(width, height)
+        return res
+
+    def visitE_matrix(self, ctx:JurjenLangParser.E_matrixContext):
+        name = self.visit(ctx.getChild(0))
+        variable = self.scope_stack.latest().get_variable(name)
+
+        if variable is None:
+            raise ValueError("Matrix variable not found")
+
+        var_val = variable.get_value()
+        if type(var_val) is not JLMatrix:
+            raise ValueError("Tried matrix operation on non-matrix variable")
+
+        x = IntParser.parse(ctx.getChild(2))
+        y = IntParser.parse(ctx.getChild(4))
+        
+        return var_val.get_value(x,y)
+
+    def visitAssignment_assign_tomatrix(self, ctx:JurjenLangParser.Assignment_assign_tomatrixContext):
+        name = self.visit(ctx.getChild(0))
+        variable = self.scope_stack.latest().get_variable(name)
+
+        if variable is None:
+            raise ValueError("Matrix variable not found")
+
+        var_val = variable.get_value()
+        if type(var_val) is not JLMatrix:
+            raise ValueError("Tried matrix operation on non-matrix variable")
+
+        x = IntParser.parse(ctx.getChild(2))
+        y = IntParser.parse(ctx.getChild(4))
+
+        assignable = self.visit(ctx.getChild(7))
+
+        var_val.set_value(x,y,assignable)
+
+    
+    def visitE_matrix_trans(self, ctx:JurjenLangParser.E_matrix_transContext):
+        name = self.visit(ctx.getChild(0))
+        return JLString(f"transpose matrix of {name}")
+
+
+    def visitE_matrix_inv(self, ctx:JurjenLangParser.E_matrix_invContext):
+        name = self.visit(ctx.getChild(0))
+        return JLString(f"inverse matrix of {name}")
+

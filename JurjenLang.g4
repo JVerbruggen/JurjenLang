@@ -21,9 +21,14 @@ stat    : assignment
         | ifchain
         | assertion
         | whileloop
+        | repeatloop
         | func_return
         | func_call
+        | break_stat
         ;
+
+break_stat  : BREAK_KW
+            ;
 
 debugtools      : printstat
                 | printscopestat
@@ -35,6 +40,9 @@ retstat     : expr = assignable         ;
 
 whileloop   : WHILE_KW expr=bool_e scope     ;
 
+repeatloop  : REPEAT_KW scope UNTIL_KW expr=bool_e
+            ;
+
 ifchain     : ifchain_if=ifstat ifchain_elifs=elifstat_chain ifchain_else=maybe_elsestat  ;
 ifstat      : IF_KW expr=bool_e scope        ;
 elifstat_chain  : (elifstat)*                ;
@@ -44,11 +52,18 @@ elsestat    : ELSE_KW scope                  ;
 
 assertion   : ASSERT_KW expr=bool_e          ;
 
-assignment  : name=variable ASSIGN ass=assignable    ;
+assignment  : name=variable SQBRACK_OPEN NUMBERS SYMB_COMMA NUMBERS SQBRACK_CLOSE ASSIGN ass=assignable #assignment_assign_tomatrix
+            | name=variable ASSIGN ass=assignable       #assignment_assign
+            | name=variable SYMB_DOUBLEPLUS             #assignment_increment
+            ;
 
 assignable  : expr=e                        # assignable_expression
             | expr=bool_e                   # assignable_bool_expression
+            | expr=matrix_assignment        # assignable_matrix
             ;
+
+matrix_assignment   : SQBRACK_OPEN x=NUMBERS SYMB_COMMA y=NUMBERS SQBRACK_CLOSE
+                    ;
 
 e   : PAR_OPEN expr=e PAR_CLOSE             # e_parentheses
     | expr=e operator=SYMB_EXCLM            # e_factorial
@@ -58,10 +73,15 @@ e   : PAR_OPEN expr=e PAR_CLOSE             # e_parentheses
     | left=e operator=SYMB_PLUS right=e     # e_addition
     | left=e operator=SYMB_MINUS right=e    # e_subtraction
     | SYMB_MINUS expr=e                     # e_negation
+    | name=variable SQBRACK_OPEN NUMBERS SYMB_COMMA NUMBERS SQBRACK_CLOSE   # e_matrix
+    | name=variable MATRIX_INV              # e_matrix_inv
+    | name=variable MATRIX_TRANS            # e_matrix_trans
     | name=variable                         # e_variable
     | e_func=func_call                      # e_func
     | value=any_value                       # e_any_value
     ;
+
+
 
 bool_e  : PAR_OPEN bool_expr=bool_e PAR_CLOSE                   # bool_parentheses
         | left=bool_e AND_KW right=bool_e                       # bool_e_and
@@ -117,6 +137,9 @@ IF_KW       : 'if'      ;
 ELIF_KW     : 'elif'    ;
 ELSE_KW     : 'else'    ;
 WHILE_KW    : 'while'   ;
+REPEAT_KW   : 'repeat'  ;
+UNTIL_KW    : 'until'   ;
+BREAK_KW    : 'break'   ;
 
 TRUE_KW     : 'true'    ;
 FALSE_KW    : 'false'   ;
@@ -125,12 +148,16 @@ AND_KW      : 'and'     ;
 OR_KW       : 'or'      ;
 NOT_KW      : 'not'     ;
 
+MATRIX_INV      : '^-1' ;
+MATRIX_TRANS    : '^T'  ;
+
 EQUALS          : '=='  ;
 ISNOT           : '!='  ;
 LESSEQUALS      : '<='  ;
 MOREEQUALS      : '>='  ;
 LESSTHAN        : '<'   ;
 MORETHAN        : '>'   ;
+SYMB_DOUBLEPLUS : '++'  ;
 SYMB_EXCLM      : '!'   ;
 SYMB_HAT        : '^'   ;
 SYMB_STAR       : '*'   ;
@@ -145,6 +172,8 @@ FLOAT_IDENT     : 'f'   ;
 ASSIGN          : '='   ;
 PAR_OPEN        : '('   ;
 PAR_CLOSE       : ')'   ;
+SQBRACK_OPEN    : '['   ;
+SQBRACK_CLOSE   : ']'   ;
 BRACK_OPEN      : '{'   ;
 BRACK_CLOSE     : '}'   ;
 IDENTIFIER      : ('a' .. 'z' | 'A' .. 'Z') ('a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_')*   ;

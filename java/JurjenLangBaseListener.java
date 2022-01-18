@@ -159,6 +159,18 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBreak_stat(JurjenLangParser.Break_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBreak_stat(JurjenLangParser.Break_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDebugtools(JurjenLangParser.DebugtoolsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -214,6 +226,18 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitWhileloop(JurjenLangParser.WhileloopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRepeatloop(JurjenLangParser.RepeatloopContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRepeatloop(JurjenLangParser.RepeatloopContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -303,13 +327,37 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignment(JurjenLangParser.AssignmentContext ctx) { }
+	@Override public void enterAssignment_assign_tomatrix(JurjenLangParser.Assignment_assign_tomatrixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignment(JurjenLangParser.AssignmentContext ctx) { }
+	@Override public void exitAssignment_assign_tomatrix(JurjenLangParser.Assignment_assign_tomatrixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAssignment_assign(JurjenLangParser.Assignment_assignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignment_assign(JurjenLangParser.Assignment_assignContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAssignment_increment(JurjenLangParser.Assignment_incrementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignment_increment(JurjenLangParser.Assignment_incrementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -339,6 +387,30 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAssignable_matrix(JurjenLangParser.Assignable_matrixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAssignable_matrix(JurjenLangParser.Assignable_matrixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMatrix_assignment(JurjenLangParser.Matrix_assignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMatrix_assignment(JurjenLangParser.Matrix_assignmentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterE_any_value(JurjenLangParser.E_any_valueContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -358,6 +430,66 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitE_subtraction(JurjenLangParser.E_subtractionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterE_matrix_trans(JurjenLangParser.E_matrix_transContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitE_matrix_trans(JurjenLangParser.E_matrix_transContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterE_matrix_inv(JurjenLangParser.E_matrix_invContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitE_matrix_inv(JurjenLangParser.E_matrix_invContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterE_exponent(JurjenLangParser.E_exponentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitE_exponent(JurjenLangParser.E_exponentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterE_multiply(JurjenLangParser.E_multiplyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitE_multiply(JurjenLangParser.E_multiplyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterE_matrix(JurjenLangParser.E_matrixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitE_matrix(JurjenLangParser.E_matrixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -399,18 +531,6 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterE_exponent(JurjenLangParser.E_exponentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitE_exponent(JurjenLangParser.E_exponentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterE_parentheses(JurjenLangParser.E_parenthesesContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -418,18 +538,6 @@ public class JurjenLangBaseListener implements JurjenLangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitE_parentheses(JurjenLangParser.E_parenthesesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterE_multiply(JurjenLangParser.E_multiplyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitE_multiply(JurjenLangParser.E_multiplyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

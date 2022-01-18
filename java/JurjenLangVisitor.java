@@ -84,6 +84,12 @@ public interface JurjenLangVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStat(JurjenLangParser.StatContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JurjenLangParser#break_stat}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBreak_stat(JurjenLangParser.Break_statContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JurjenLangParser#debugtools}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -113,6 +119,12 @@ public interface JurjenLangVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitWhileloop(JurjenLangParser.WhileloopContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JurjenLangParser#repeatloop}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRepeatloop(JurjenLangParser.RepeatloopContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JurjenLangParser#ifchain}.
 	 * @param ctx the parse tree
@@ -156,11 +168,26 @@ public interface JurjenLangVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssertion(JurjenLangParser.AssertionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JurjenLangParser#assignment}.
+	 * Visit a parse tree produced by the {@code assignment_assign_tomatrix}
+	 * labeled alternative in {@link JurjenLangParser#assignment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssignment(JurjenLangParser.AssignmentContext ctx);
+	T visitAssignment_assign_tomatrix(JurjenLangParser.Assignment_assign_tomatrixContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code assignment_assign}
+	 * labeled alternative in {@link JurjenLangParser#assignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignment_assign(JurjenLangParser.Assignment_assignContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code assignment_increment}
+	 * labeled alternative in {@link JurjenLangParser#assignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignment_increment(JurjenLangParser.Assignment_incrementContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code assignable_expression}
 	 * labeled alternative in {@link JurjenLangParser#assignable}.
@@ -176,6 +203,19 @@ public interface JurjenLangVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignable_bool_expression(JurjenLangParser.Assignable_bool_expressionContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code assignable_matrix}
+	 * labeled alternative in {@link JurjenLangParser#assignable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignable_matrix(JurjenLangParser.Assignable_matrixContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JurjenLangParser#matrix_assignment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMatrix_assignment(JurjenLangParser.Matrix_assignmentContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code e_any_value}
 	 * labeled alternative in {@link JurjenLangParser#e}.
 	 * @param ctx the parse tree
@@ -189,6 +229,41 @@ public interface JurjenLangVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitE_subtraction(JurjenLangParser.E_subtractionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code e_matrix_trans}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitE_matrix_trans(JurjenLangParser.E_matrix_transContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code e_matrix_inv}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitE_matrix_inv(JurjenLangParser.E_matrix_invContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code e_exponent}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitE_exponent(JurjenLangParser.E_exponentContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code e_multiply}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitE_multiply(JurjenLangParser.E_multiplyContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code e_matrix}
+	 * labeled alternative in {@link JurjenLangParser#e}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitE_matrix(JurjenLangParser.E_matrixContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code e_addition}
 	 * labeled alternative in {@link JurjenLangParser#e}.
@@ -211,26 +286,12 @@ public interface JurjenLangVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitE_factorial(JurjenLangParser.E_factorialContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code e_exponent}
-	 * labeled alternative in {@link JurjenLangParser#e}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitE_exponent(JurjenLangParser.E_exponentContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code e_parentheses}
 	 * labeled alternative in {@link JurjenLangParser#e}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitE_parentheses(JurjenLangParser.E_parenthesesContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code e_multiply}
-	 * labeled alternative in {@link JurjenLangParser#e}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitE_multiply(JurjenLangParser.E_multiplyContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code e_negation}
 	 * labeled alternative in {@link JurjenLangParser#e}.

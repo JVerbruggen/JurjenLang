@@ -116,6 +116,15 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JurjenLangParser#break_stat.
+    def enterBreak_stat(self, ctx:JurjenLangParser.Break_statContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#break_stat.
+    def exitBreak_stat(self, ctx:JurjenLangParser.Break_statContext):
+        pass
+
+
     # Enter a parse tree produced by JurjenLangParser#debugtools.
     def enterDebugtools(self, ctx:JurjenLangParser.DebugtoolsContext):
         pass
@@ -158,6 +167,15 @@ class JurjenLangListener(ParseTreeListener):
 
     # Exit a parse tree produced by JurjenLangParser#whileloop.
     def exitWhileloop(self, ctx:JurjenLangParser.WhileloopContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#repeatloop.
+    def enterRepeatloop(self, ctx:JurjenLangParser.RepeatloopContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#repeatloop.
+    def exitRepeatloop(self, ctx:JurjenLangParser.RepeatloopContext):
         pass
 
 
@@ -224,12 +242,30 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by JurjenLangParser#assignment.
-    def enterAssignment(self, ctx:JurjenLangParser.AssignmentContext):
+    # Enter a parse tree produced by JurjenLangParser#assignment_assign_tomatrix.
+    def enterAssignment_assign_tomatrix(self, ctx:JurjenLangParser.Assignment_assign_tomatrixContext):
         pass
 
-    # Exit a parse tree produced by JurjenLangParser#assignment.
-    def exitAssignment(self, ctx:JurjenLangParser.AssignmentContext):
+    # Exit a parse tree produced by JurjenLangParser#assignment_assign_tomatrix.
+    def exitAssignment_assign_tomatrix(self, ctx:JurjenLangParser.Assignment_assign_tomatrixContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#assignment_assign.
+    def enterAssignment_assign(self, ctx:JurjenLangParser.Assignment_assignContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#assignment_assign.
+    def exitAssignment_assign(self, ctx:JurjenLangParser.Assignment_assignContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#assignment_increment.
+    def enterAssignment_increment(self, ctx:JurjenLangParser.Assignment_incrementContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#assignment_increment.
+    def exitAssignment_increment(self, ctx:JurjenLangParser.Assignment_incrementContext):
         pass
 
 
@@ -251,6 +287,24 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by JurjenLangParser#assignable_matrix.
+    def enterAssignable_matrix(self, ctx:JurjenLangParser.Assignable_matrixContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#assignable_matrix.
+    def exitAssignable_matrix(self, ctx:JurjenLangParser.Assignable_matrixContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#matrix_assignment.
+    def enterMatrix_assignment(self, ctx:JurjenLangParser.Matrix_assignmentContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#matrix_assignment.
+    def exitMatrix_assignment(self, ctx:JurjenLangParser.Matrix_assignmentContext):
+        pass
+
+
     # Enter a parse tree produced by JurjenLangParser#e_any_value.
     def enterE_any_value(self, ctx:JurjenLangParser.E_any_valueContext):
         pass
@@ -266,6 +320,51 @@ class JurjenLangListener(ParseTreeListener):
 
     # Exit a parse tree produced by JurjenLangParser#e_subtraction.
     def exitE_subtraction(self, ctx:JurjenLangParser.E_subtractionContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#e_matrix_trans.
+    def enterE_matrix_trans(self, ctx:JurjenLangParser.E_matrix_transContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#e_matrix_trans.
+    def exitE_matrix_trans(self, ctx:JurjenLangParser.E_matrix_transContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#e_matrix_inv.
+    def enterE_matrix_inv(self, ctx:JurjenLangParser.E_matrix_invContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#e_matrix_inv.
+    def exitE_matrix_inv(self, ctx:JurjenLangParser.E_matrix_invContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#e_exponent.
+    def enterE_exponent(self, ctx:JurjenLangParser.E_exponentContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#e_exponent.
+    def exitE_exponent(self, ctx:JurjenLangParser.E_exponentContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#e_multiply.
+    def enterE_multiply(self, ctx:JurjenLangParser.E_multiplyContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#e_multiply.
+    def exitE_multiply(self, ctx:JurjenLangParser.E_multiplyContext):
+        pass
+
+
+    # Enter a parse tree produced by JurjenLangParser#e_matrix.
+    def enterE_matrix(self, ctx:JurjenLangParser.E_matrixContext):
+        pass
+
+    # Exit a parse tree produced by JurjenLangParser#e_matrix.
+    def exitE_matrix(self, ctx:JurjenLangParser.E_matrixContext):
         pass
 
 
@@ -296,30 +395,12 @@ class JurjenLangListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by JurjenLangParser#e_exponent.
-    def enterE_exponent(self, ctx:JurjenLangParser.E_exponentContext):
-        pass
-
-    # Exit a parse tree produced by JurjenLangParser#e_exponent.
-    def exitE_exponent(self, ctx:JurjenLangParser.E_exponentContext):
-        pass
-
-
     # Enter a parse tree produced by JurjenLangParser#e_parentheses.
     def enterE_parentheses(self, ctx:JurjenLangParser.E_parenthesesContext):
         pass
 
     # Exit a parse tree produced by JurjenLangParser#e_parentheses.
     def exitE_parentheses(self, ctx:JurjenLangParser.E_parenthesesContext):
-        pass
-
-
-    # Enter a parse tree produced by JurjenLangParser#e_multiply.
-    def enterE_multiply(self, ctx:JurjenLangParser.E_multiplyContext):
-        pass
-
-    # Exit a parse tree produced by JurjenLangParser#e_multiply.
-    def exitE_multiply(self, ctx:JurjenLangParser.E_multiplyContext):
         pass
 
 

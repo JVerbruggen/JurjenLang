@@ -24,3 +24,7 @@ class EmptyReturner(Returner):
     
     def is_empty(self):
         return True
+
+class Breaker:
+    def __init__(self):
+        self.breaking = True

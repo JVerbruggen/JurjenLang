@@ -69,6 +69,11 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by JurjenLangParser#break_stat.
+    def visitBreak_stat(self, ctx:JurjenLangParser.Break_statContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by JurjenLangParser#debugtools.
     def visitDebugtools(self, ctx:JurjenLangParser.DebugtoolsContext):
         return self.visitChildren(ctx)
@@ -91,6 +96,11 @@ class JurjenLangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by JurjenLangParser#whileloop.
     def visitWhileloop(self, ctx:JurjenLangParser.WhileloopContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#repeatloop.
+    def visitRepeatloop(self, ctx:JurjenLangParser.RepeatloopContext):
         return self.visitChildren(ctx)
 
 
@@ -129,8 +139,18 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by JurjenLangParser#assignment.
-    def visitAssignment(self, ctx:JurjenLangParser.AssignmentContext):
+    # Visit a parse tree produced by JurjenLangParser#assignment_assign_tomatrix.
+    def visitAssignment_assign_tomatrix(self, ctx:JurjenLangParser.Assignment_assign_tomatrixContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#assignment_assign.
+    def visitAssignment_assign(self, ctx:JurjenLangParser.Assignment_assignContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#assignment_increment.
+    def visitAssignment_increment(self, ctx:JurjenLangParser.Assignment_incrementContext):
         return self.visitChildren(ctx)
 
 
@@ -144,6 +164,16 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by JurjenLangParser#assignable_matrix.
+    def visitAssignable_matrix(self, ctx:JurjenLangParser.Assignable_matrixContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#matrix_assignment.
+    def visitMatrix_assignment(self, ctx:JurjenLangParser.Matrix_assignmentContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by JurjenLangParser#e_any_value.
     def visitE_any_value(self, ctx:JurjenLangParser.E_any_valueContext):
         return self.visitChildren(ctx)
@@ -151,6 +181,31 @@ class JurjenLangVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by JurjenLangParser#e_subtraction.
     def visitE_subtraction(self, ctx:JurjenLangParser.E_subtractionContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#e_matrix_trans.
+    def visitE_matrix_trans(self, ctx:JurjenLangParser.E_matrix_transContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#e_matrix_inv.
+    def visitE_matrix_inv(self, ctx:JurjenLangParser.E_matrix_invContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#e_exponent.
+    def visitE_exponent(self, ctx:JurjenLangParser.E_exponentContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#e_multiply.
+    def visitE_multiply(self, ctx:JurjenLangParser.E_multiplyContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by JurjenLangParser#e_matrix.
+    def visitE_matrix(self, ctx:JurjenLangParser.E_matrixContext):
         return self.visitChildren(ctx)
 
 
@@ -169,18 +224,8 @@ class JurjenLangVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by JurjenLangParser#e_exponent.
-    def visitE_exponent(self, ctx:JurjenLangParser.E_exponentContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by JurjenLangParser#e_parentheses.
     def visitE_parentheses(self, ctx:JurjenLangParser.E_parenthesesContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by JurjenLangParser#e_multiply.
-    def visitE_multiply(self, ctx:JurjenLangParser.E_multiplyContext):
         return self.visitChildren(ctx)
 
 

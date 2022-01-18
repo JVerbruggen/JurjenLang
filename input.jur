@@ -1,20 +1,62 @@
 x = 0
+
+print x
+print "--before--"
+
+repeat{
+    print x
+
+    x++
+} until x>10
+
 y = 0
 
-func somefunction x y {
-    x = 6
-    y = 7
-    print x
+print "---outside---"
+print x
+
+
+print "Break test"
+
+repeat{
     print y
-}
 
-print "Outside function:"
-print x
-print y
+    if y == 4{
+        break
+    }
 
-print "Inside function:"
-somefunction(x, y)
+    y++
+} until y>10
 
-print "Outside function 2:"
-print x
-print y
+print "End break test"
+print "Currently not working"
+
+
+myMatrix = [5,7]
+print myMatrix
+
+print myMatrix[0,0]
+
+myMatrix[0,0] = 1
+print myMatrix
+print myMatrix[0,0]
+
+print "value at loc 0,0 in myMatrix is: " + myMatrix[0,0]
+
+print "adding two is in total: " + (2 + myMatrix[0,0])
+
+print myMatrix^-1
+print myMatrix^T
+
+myMatrix2 = [4,4]
+
+print "Addition:"
+print myMatrix + myMatrix2
+
+print "Multiply:"
+print myMatrix * myMatrix2
+print myMatrix * 2
+print 2 * myMatrix
+
+print 2 * (myMatrix * myMatrix2)
+
+print "Matrix definitions at init not available"
