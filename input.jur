@@ -1,26 +1,20 @@
-if 2==2{
-    print "2 == 2 is true"
-}else{
-    print "2 == 2 is false"
+x = 0
+y = 0
+
+func somefunction x y {
+    x = 6
+    y = 7
+    print x
+    print y
 }
 
-i = 0
-while i < 5{
-    print "loooop"
-    i = i + 1
-}
+print "Outside function:"
+print x
+print y
 
-func printstringone {
-    print "one"
-}
+print "Inside function:"
+somefunction(x, y)
 
-func printstringtwo {
-    print "two"
-}
-
-func printspec printfunction {
-    printfunction()
-}
-
-printspec(printstringone)
-printspec(printstringtwo)
+print "Outside function 2:"
+print x
+print y
