@@ -36,7 +36,7 @@ print myMatrix
 
 print myMatrix[0,0]
 
-myMatrix[0,0] = 1
+myMatrix[2,3] = 1
 print myMatrix
 print myMatrix[0,0]
 

@@ -6,7 +6,7 @@ class JLMatrix(IValue):
     def __init__(self, width, height):
         self.width = width
         self.height = height
-        self.values = [[0 for _ in range(height)] for _ in range(width)]
+        self.values = [[JLInteger(0) for _ in range(height)] for _ in range(width)]
 
     def string(self):
         res = f"<Matrix of size {self.width}x{self.height}>\n"
